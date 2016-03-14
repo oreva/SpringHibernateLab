@@ -1,5 +1,6 @@
 package com.oreva.simpleweb.mvc.services;
 
+import com.oreva.simpleweb.mvc.beans.Message;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,4 +12,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MessageService {
+    public void saveMessage(Message message) {
+    }
 }
