@@ -35,7 +35,7 @@ public class MessageController {
     @RequestMapping(method = RequestMethod.GET, params = "new")
     public String storeMessage(Model model) {
         model.addAttribute(new Message());
-        return "messages/edit";  //?
+        return "messages/edit";
     }
 
     @RequestMapping(method=RequestMethod.POST)

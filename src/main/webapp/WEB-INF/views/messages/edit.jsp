@@ -25,14 +25,16 @@
                     <tr>
                         <th><label for="user_phone">Phone Number:</label></th>
                         <td><sf:input path="phone" size="10" id="user_phone"/>
-                            <small>Enter your phone number</small>
+                            <small>Enter your phone number</small><br/>
+                            <sf:errors path="phone" cssClass="error"/>
                         </td>
                     </tr>
                     <tr>
                         <th><label for="user_email">Email Address:</label></th>
-                        <td><sf:input path="mail" size="30"
+                        <td><sf:input path="mail" size="50"
                                       id="user_email"/>
-                            <small>Enter your email address</small>
+                            <small>Enter your email address</small><br/>
+                            <sf:errors path="mail" cssClass="error"/>
                         </td>
                     </tr>
                     <tr>
@@ -40,11 +42,12 @@
                         <td><sf:textarea path="text" maxlength="300"
                                          rows="5" cols="80"
                                          id="user_message"/>
-                            <small id="msg_area">Enter you message</small>
+                            <small id="msg_area">Enter you message</small><br/>
+                            <sf:errors path="text" cssClass="error"/>
                         </td>
                     </tr>
                     <tr>
-                        <td><sf:button name="Send Message"/>
+                        <td><sf:button value="">Send Message</sf:button>
                         </td>
                     </tr>
                 </table>

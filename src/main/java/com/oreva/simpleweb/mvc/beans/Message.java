@@ -1,6 +1,8 @@
 package com.oreva.simpleweb.mvc.beans;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,12 +19,23 @@ public class Message {
     @Column(name = "id")
     private Long id;
 
+    @Size(min = 2, max = 10,
+        message = "User phone must be between 2 and 10 characters long.")
+    @Pattern(regexp = "[0-9]+",
+        message = "User phone must contain only digit characters.")
     @Column(name = "phone")
     private String phone;
 
+    @Size(min = 5, max = 50,
+        message = "User email must be between 5 and 50 character long.")
+    @Pattern(regexp = "(\\w)+@[a-zA-Z0-9]+(\\.[a-zA-Z]+)+",
+        message = "Invalid email format.")
     @Column(name = "mail")
     private String mail;
 
+    @Size(min = 1,
+        max = 300,
+        message = "Message must be between 1 and 300 characters long.")
     @Column(name = "text")
     private String text;
 
