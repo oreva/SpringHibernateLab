@@ -1,7 +1,11 @@
 package com.oreva.simpleweb.mvc.dao;
 
 import com.oreva.simpleweb.mvc.beans.Message;
+import com.oreva.simpleweb.mvc.util.JPAUtil;
 import org.springframework.stereotype.Component;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,6 +17,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class MessageDAO {
     public void saveMessage(Message message) {
-        //TODO: move saving from MessageService here
+        EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+
+        entityManager.persist(message);
+
+        transaction.commit();
+        entityManager.close();
     }
 }

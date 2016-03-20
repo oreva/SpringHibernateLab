@@ -20,8 +20,7 @@ import static org.mockito.Mockito.mock;
 public class HomeControllerTest {
     @Test
     public void testShowHomePage() throws Exception {
-        MessageService messageService = mock(MessageService.class);
-        HomeController homeController = new HomeController(messageService);
+        HomeController homeController = new HomeController();
         String viewName = homeController.showHomePage();
 
         assertEquals(viewName, "home");
