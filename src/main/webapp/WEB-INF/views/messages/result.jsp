@@ -18,7 +18,7 @@
             <input type="hidden" name="new" value="">
             <input type="submit" value="Create New Message">
         </form>
-        <form action="messages/list">
+        <form action="messages/list" method="GET">
             <input type="submit" value="Read All Messages">
         </form>
     </div>

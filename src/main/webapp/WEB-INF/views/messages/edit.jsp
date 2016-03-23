@@ -31,7 +31,7 @@
                     </tr>
                     <tr>
                         <th><label for="user_email">Email Address:</label></th>
-                        <td><sf:input path="mail" size="50"
+                        <td><sf:input path="mail" type="email"
                                       id="user_email"/>
                             <small>Enter your email address</small><br/>
                             <sf:errors path="mail" cssClass="error"/>

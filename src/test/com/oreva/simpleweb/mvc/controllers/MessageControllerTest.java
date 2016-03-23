@@ -7,6 +7,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.mockito.Mockito.mock;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
@@ -35,6 +36,6 @@ public class MessageControllerTest {
 
         MockMvc mockMvc = standaloneSetup(controller).build();
         mockMvc.perform(MockMvcRequestBuilders.post("/messages?new=")).
-                andExpect(view().name("redirect:messages/result"));
+                andExpect(redirectedUrl("messages/result"));
     }
 }

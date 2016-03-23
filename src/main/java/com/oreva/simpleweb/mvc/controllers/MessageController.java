@@ -5,6 +5,7 @@ import com.oreva.simpleweb.mvc.services.MessageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,11 +41,21 @@ public class MessageController {
 
     @RequestMapping(method=RequestMethod.POST)
     public String addMessageFromForm(@Valid Message message,
-                                     BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
+                                     Errors errors) {
+        if(errors.hasErrors()) {
             return "messages/edit";
         }
         service.saveMessage(message);
-        return "redirect:messages/result";
+        return "messages/result";
     }
+
+    @RequestMapping(value = "/result", method = RequestMethod.GET)
+    public String showResultPage(Model model) {
+        return "messages/result";
+    }
+
+    /*@RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String showAllMessages(Model model) {
+        return "messages/list";
+    }     */
 }

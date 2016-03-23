@@ -5,6 +5,7 @@ import com.oreva.simpleweb.mvc.dao.MessageDAO;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 /**
  * Created with IntelliJ IDEA.
