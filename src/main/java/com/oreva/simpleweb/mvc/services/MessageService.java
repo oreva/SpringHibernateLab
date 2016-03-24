@@ -18,16 +18,8 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 public class MessageService extends GenericEntityService {
-    private final MessageDAO dao;
-
     @Inject
-    public MessageService(MessageDAO dao) {
-        this.dao = dao;
-    }
-
-    /*public void saveMessage(Message message) {
-        dao.saveMessage(message);
-    }  */
+    private MessageDAO dao;
 
     @Override
     public void save(IEntity entity) {

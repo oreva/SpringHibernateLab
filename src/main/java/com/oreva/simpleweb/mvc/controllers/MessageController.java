@@ -23,13 +23,8 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/messages")
 public class MessageController {
-    private final MessageService messageService;
-
     @Inject
-    public MessageController(MessageService service) {
-
-        this.messageService = service;
-    }
+    private MessageService messageService;
 
     //@RequestMapping(method = RequestMethod.GET, params = "new")
     //@RequestMapping(value = "/edit", method = RequestMethod.GET)
