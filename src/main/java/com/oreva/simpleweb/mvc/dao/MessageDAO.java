@@ -20,7 +20,6 @@ import javax.transaction.Transactional;
  * To change this template use File | Settings | File Templates.
  */
 @Repository
-//@Transactional
 public class MessageDAO {
 
     @PersistenceContext

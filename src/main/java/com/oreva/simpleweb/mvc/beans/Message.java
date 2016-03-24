@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "MESSAGE")
-public class Message {
+public class Message extends GenericEntity {
     @Id
     @GeneratedValue
     @Column(name = "id")

@@ -1,5 +1,6 @@
 package com.oreva.simpleweb.mvc.services;
 
+import com.oreva.simpleweb.mvc.beans.IEntity;
 import com.oreva.simpleweb.mvc.beans.Message;
 import com.oreva.simpleweb.mvc.dao.MessageDAO;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,8 @@ import javax.transaction.Transactional;
  * To change this template use File | Settings | File Templates.
  */
 @Service
-public class MessageService {
+@Transactional
+public class MessageService extends GenericEntityService {
     private final MessageDAO dao;
 
     @Inject
@@ -23,7 +25,14 @@ public class MessageService {
         this.dao = dao;
     }
 
-    public void saveMessage(Message message) {
+    /*public void saveMessage(Message message) {
+        dao.saveMessage(message);
+    }  */
+
+    @Override
+    public void save(IEntity entity) {
+        Message message = (Message) entity;
+
         dao.saveMessage(message);
     }
 }

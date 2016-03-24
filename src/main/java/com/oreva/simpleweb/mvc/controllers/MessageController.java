@@ -23,12 +23,12 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/messages")
 public class MessageController {
-    private final MessageService service;
+    private final MessageService messageService;
 
     @Inject
     public MessageController(MessageService service) {
 
-        this.service = service;
+        this.messageService = service;
     }
 
     //@RequestMapping(method = RequestMethod.GET, params = "new")
@@ -45,7 +45,7 @@ public class MessageController {
         if(errors.hasErrors()) {
             return "messages/edit";
         }
-        service.saveMessage(message);
+        messageService.save(message);
         return "messages/result";
     }
 
