@@ -1,6 +1,7 @@
 package com.oreva.simpleweb.mvc.services;
 
-import com.oreva.simpleweb.mvc.beans.IEntity;
+import com.oreva.simpleweb.mvc.entities.IEntity;
+import com.oreva.simpleweb.mvc.web.stubs.IStub;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -14,14 +15,14 @@ import javax.transaction.Transactional;
  */
 @Service
 @Transactional
-public class GenericEntityService implements IEntityService {
+public class EntityService implements IEntityService {
     @Override
     public IEntity getById() {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void save(IEntity entity) {
+    public void saveFromStub(IStub stub) {
         throw new UnsupportedOperationException();
     }
 

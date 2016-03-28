@@ -19,7 +19,7 @@
     <div>
         <h3>Create new message</h3>
 
-        <sf:form method="POST" modelAttribute="message">
+        <sf:form method="POST" modelAttribute="messageStub">
             <fieldset>
                 <table cellspacing="0">
                     <tr>

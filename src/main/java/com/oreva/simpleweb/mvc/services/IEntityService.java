@@ -1,6 +1,7 @@
 package com.oreva.simpleweb.mvc.services;
 
-import com.oreva.simpleweb.mvc.beans.IEntity;
+import com.oreva.simpleweb.mvc.entities.IEntity;
+import com.oreva.simpleweb.mvc.web.stubs.IStub;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,5 +14,5 @@ public interface IEntityService {
 
     IEntity getById();
 
-    void save(IEntity entity);
+    void saveFromStub(IStub entity);
 }

@@ -1,16 +1,10 @@
 package com.oreva.simpleweb.mvc.dao;
 
-import com.oreva.simpleweb.mvc.beans.Message;
-import com.oreva.simpleweb.mvc.util.JPAUtil;
-import org.springframework.stereotype.Component;
+import com.oreva.simpleweb.mvc.entities.Message;
 import org.springframework.stereotype.Repository;
 
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 /**
  * Created with IntelliJ IDEA.

@@ -1,4 +1,4 @@
-package com.oreva.simpleweb.mvc.beans;
+package com.oreva.simpleweb.mvc.entities;
 
 /**
  * Created with IntelliJ IDEA.

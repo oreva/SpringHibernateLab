@@ -1,9 +1,9 @@
-package com.oreva.simpleweb.mvc.beans;
+package com.oreva.simpleweb.mvc.entities;
+
+import com.oreva.simpleweb.mvc.web.stubs.MessageStub;
+import org.springframework.core.convert.converter.Converter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,34 +12,20 @@ import javax.validation.constraints.Size;
  * Time: 8:56 AM
  * To change this template use File | Settings | File Templates.
  */
-@Entity
+@javax.persistence.Entity
 @Table(name = "MESSAGE")
-public class Message extends GenericEntity {
+public class Message extends Entity {
     @Id
     @GeneratedValue
     @Column(name = "id")
     private Long id;
 
-    @NotNull
-    @Size(min = 2, max = 10,
-        message = "User phone must be between 2 and 10 characters long.")
-    @Pattern(regexp = "[0-9]+",
-        message = "User phone must contain only digit characters.")
     @Column(name = "phone")
     private String phone;
 
-    @NotNull
-    @Size(min = 5, max = 50,
-        message = "User email must be between 5 and 50 character long.")
-    @Pattern(regexp = "(\\w)+@[a-zA-Z0-9]+(\\.[a-zA-Z]+)+",
-        message = "Invalid email format.")
     @Column(name = "mail")
     private String mail;
 
-    @NotNull
-    @Size(min = 1,
-        max = 300,
-        message = "Message must be between 1 and 300 characters long.")
     @Column(name = "text")
     private String text;
 
@@ -50,6 +36,13 @@ public class Message extends GenericEntity {
         this.phone = phone;
         this.mail = mail;
         this.text = text;
+    }
+
+    public Message(MessageStub stub) {
+        id = stub.getId();
+        phone = stub.getPhone();
+        mail = stub.getMail();
+        text = stub.getText();
     }
 
     public Long getId() {
@@ -82,5 +75,24 @@ public class Message extends GenericEntity {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+
+    @Override
+    public Converter<Message, MessageStub> converter() {
+        if (null == converter) {
+            converter = new MessageToStubConverter();
+        }
+        return converter;
+    }
+
+    @Transient
+    private MessageToStubConverter converter;
+
+    private class MessageToStubConverter implements Converter<Message, MessageStub> {
+        @Override
+        public MessageStub convert(Message message) {
+            return new MessageStub(message);
+        }
     }
 }

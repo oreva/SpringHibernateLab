@@ -10,4 +10,10 @@
             <context-root>SpringHibernateLab</context-root>
         </web>
     </module>
+    <module id="SpringHibernateLab-Web">
+        <web>
+            <web-uri>web.war</web-uri>
+            <context-root>SpringHibernateLabWeb</context-root>
+        </web>
+    </module>
 </application>
