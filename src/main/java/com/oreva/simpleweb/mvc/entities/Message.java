@@ -1,5 +1,6 @@
 package com.oreva.simpleweb.mvc.entities;
 
+import com.oreva.simpleweb.mvc.web.stubs.IStub;
 import com.oreva.simpleweb.mvc.web.stubs.MessageStub;
 import org.springframework.core.convert.converter.Converter;
 
@@ -77,22 +78,8 @@ public class Message extends Entity {
         this.text = text;
     }
 
-
     @Override
-    public Converter<Message, MessageStub> converter() {
-        if (null == converter) {
-            converter = new MessageToStubConverter();
-        }
-        return converter;
-    }
-
-    @Transient
-    private MessageToStubConverter converter;
-
-    private class MessageToStubConverter implements Converter<Message, MessageStub> {
-        @Override
-        public MessageStub convert(Message message) {
-            return new MessageStub(message);
-        }
+    public IStub convertToStub() {
+        return new MessageStub(this);
     }
 }

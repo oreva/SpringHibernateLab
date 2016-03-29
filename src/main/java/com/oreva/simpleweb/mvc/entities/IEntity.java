@@ -1,5 +1,7 @@
 package com.oreva.simpleweb.mvc.entities;
 
+import com.oreva.simpleweb.mvc.web.stubs.IStub;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Olga
@@ -8,4 +10,5 @@ package com.oreva.simpleweb.mvc.entities;
  * To change this template use File | Settings | File Templates.
  */
 public interface IEntity {
+    IStub convertToStub();
 }

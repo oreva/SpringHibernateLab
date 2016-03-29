@@ -74,8 +74,8 @@
           class="org.springframework.context.support.ConversionServiceFactoryBean">
         <property name="converters">
             <set>
-                <bean class="com.oreva.simpleweb.mvc.converters.EntityToStubConverter"/>
-                <bean class="com.oreva.simpleweb.mvc.converters.EntityFromStubConverter"/>
+                <bean class="com.oreva.simpleweb.mvc.converters.EntityToStubConverterFactory"/>
+                <bean class="com.oreva.simpleweb.mvc.converters.EntityFromStubConverterFactory"/>
             </set>
         </property>
     </bean>

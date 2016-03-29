@@ -1,7 +1,6 @@
 package com.oreva.simpleweb.mvc.web.stubs;
 
-import com.oreva.simpleweb.mvc.converters.IConvertible;
-import com.oreva.simpleweb.mvc.entities.Entity;
+import com.oreva.simpleweb.mvc.entities.IEntity;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,5 +9,13 @@ import com.oreva.simpleweb.mvc.entities.Entity;
  * Time: 12:04 PM
  * To change this template use File | Settings | File Templates.
  */
-public abstract class Stub implements IStub, IConvertible {
+public abstract class Stub implements IStub {
+    /**
+     *
+     * @return null if there is no way to convert to IEntity
+     */
+    @Override
+    public IEntity convertToEntity() {
+        return null;
+    }
 }
