@@ -1,12 +1,10 @@
 package com.oreva.simpleweb.mvc.web.stubs;
 
-import com.oreva.simpleweb.mvc.entities.Entity;
 import com.oreva.simpleweb.mvc.entities.IEntity;
 import com.oreva.simpleweb.mvc.entities.Message;
-import org.springframework.core.convert.converter.Converter;
+import com.oreva.simpleweb.mvc.entities.User;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -20,7 +18,7 @@ public class MessageStub extends Stub {
 
     private Long id;
 
-    @NotNull
+    /*@NotNull
     @Size(min = 2, max = 10,
             message = "User phone must be between 2 and 10 characters long.")
     @Pattern(regexp = "[0-9]+",
@@ -32,7 +30,7 @@ public class MessageStub extends Stub {
             message = "User email must be between 5 and 50 character long.")
     @Pattern(regexp = "(\\w)+@[a-zA-Z0-9]+(\\.[a-zA-Z]+)+",
             message = "Invalid email format.")
-    private String mail;
+    private String mail;   */
 
     @NotNull
     @Size(min = 1,
@@ -40,37 +38,12 @@ public class MessageStub extends Stub {
             message = "Message must be between 1 and 300 characters long.")
     private String text;
 
-    public MessageStub() {}
-
-    public MessageStub(Message message) {
-        id = message.getId();
-        phone = message.getPhone();
-        mail = message.getMail();
-        text = message.getText();
-    }
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
     }
 
     public String getText() {
@@ -83,6 +56,9 @@ public class MessageStub extends Stub {
 
     @Override
     public IEntity convertToEntity() {
-        return new Message(this);
+        Message entity = new Message();
+        entity.setId(id);
+        entity.setText(text);
+        return entity;
     }
 }

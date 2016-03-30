@@ -15,9 +15,14 @@ import javax.transaction.Transactional;
  */
 @Service
 @Transactional
-public class EntityService implements IEntityService {
+public abstract class EntityService implements IEntityService {
     @Override
     public IEntity getById() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void save(IEntity entity) {
         throw new UnsupportedOperationException();
     }
 
@@ -25,5 +30,4 @@ public class EntityService implements IEntityService {
     public void saveFromStub(IStub stub) {
         throw new UnsupportedOperationException();
     }
-
 }

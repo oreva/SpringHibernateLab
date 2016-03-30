@@ -1,8 +1,11 @@
 package com.oreva.simpleweb.mvc.controllers;
 
 import com.oreva.simpleweb.mvc.entities.Message;
+import com.oreva.simpleweb.mvc.entities.User;
 import com.oreva.simpleweb.mvc.services.MessageService;
+import com.oreva.simpleweb.mvc.services.UserService;
 import com.oreva.simpleweb.mvc.web.stubs.MessageStub;
+import com.oreva.simpleweb.mvc.web.stubs.UserStub;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -24,22 +27,39 @@ import javax.validation.Valid;
 public class MessageController {
     @Inject
     private MessageService messageService;
+    @Inject
+    private UserService userService;
 
     //@RequestMapping(method = RequestMethod.GET, params = "new")
     //@RequestMapping(value = "/edit", method = RequestMethod.GET)
     @RequestMapping(method = RequestMethod.GET, params = "new")
     public String storeMessage(Model model) {
         model.addAttribute(new MessageStub());
+
+        //new user (temp code)
+        User user = new User();
+        user.setMail("oreva@gmail.com");
+        user.setPhone("3510975");
+        user.setFirstName("Olga");
+        user.setLastName("Reva");
+        userService.save(user);
+        userService.setCurrentUser(user);
+
         return "messages/edit";
     }
 
     @RequestMapping(method=RequestMethod.POST)
-    public String addMessageFromForm(@Valid MessageStub stub,
+    public String addMessageFromForm(@Valid MessageStub messageStub,
                                      Errors errors) {
         if(errors.hasErrors()) {
             return "messages/edit";
         }
-        messageService.saveFromStub(stub);
+
+        User user = userService.getCurrentUser();
+        Message message = (Message) messageStub.convertToEntity();
+        user.addMessage(message);
+        messageService.save(message);
+
         return "messages/result";
     }
 

@@ -80,4 +80,9 @@
         </property>
     </bean>
 
+    <bean id="collectionConverter"
+          class="org.springframework.core.convert.support.CollectionToCollectionConverter">
+        <constructor-arg name="conversionService" ref="conversionService"/>
+    </bean>
+
 </beans>

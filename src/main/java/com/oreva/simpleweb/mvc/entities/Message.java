@@ -2,9 +2,10 @@ package com.oreva.simpleweb.mvc.entities;
 
 import com.oreva.simpleweb.mvc.web.stubs.IStub;
 import com.oreva.simpleweb.mvc.web.stubs.MessageStub;
-import org.springframework.core.convert.converter.Converter;
 
+import javax.inject.Inject;
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,30 +22,11 @@ public class Message extends Entity {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "phone")
-    private String phone;
-
-    @Column(name = "mail")
-    private String mail;
-
     @Column(name = "text")
     private String text;
 
-    public Message() {
-    }
-
-    public Message(String phone, String mail, String text) {
-        this.phone = phone;
-        this.mail = mail;
-        this.text = text;
-    }
-
-    public Message(MessageStub stub) {
-        id = stub.getId();
-        phone = stub.getPhone();
-        mail = stub.getMail();
-        text = stub.getText();
-    }
+    @ManyToOne
+    private User user;
 
     public Long getId() {
         return id;
@@ -52,22 +34,6 @@ public class Message extends Entity {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
     }
 
     public String getText() {
@@ -78,8 +44,38 @@ public class Message extends Entity {
         this.text = text;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public IStub convertToStub() {
-        return new MessageStub(this);
+        MessageStub stub = new MessageStub();
+        stub.setId(id);
+        stub.setText(text);
+        return stub;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (null == obj && getClass() != obj.getClass()) {
+            return false;
+        }
+        Message m = (Message) obj;
+        return Objects.equals(id, m.getId()) &&
+                Objects.equals(text, m.getText()) &&
+                Objects.equals(user, m.getUser());
     }
 }

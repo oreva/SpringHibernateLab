@@ -23,21 +23,6 @@
             <fieldset>
                 <table cellspacing="0">
                     <tr>
-                        <th><label for="user_phone">Phone Number:</label></th>
-                        <td><sf:input path="phone" size="10" id="user_phone"/>
-                            <small>Enter your phone number</small><br/>
-                            <sf:errors path="phone" cssClass="error"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th><label for="user_email">Email Address:</label></th>
-                        <td><sf:input path="mail" type="email"
-                                      id="user_email"/>
-                            <small>Enter your email address</small><br/>
-                            <sf:errors path="mail" cssClass="error"/>
-                        </td>
-                    </tr>
-                    <tr>
                         <th><label for="user_message">Message:</label></th>
                         <td><sf:textarea path="text" maxlength="300"
                                          rows="5" cols="80"

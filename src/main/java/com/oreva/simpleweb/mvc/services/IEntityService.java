@@ -14,5 +14,6 @@ public interface IEntityService {
 
     IEntity getById();
 
+    void save(IEntity entity);
     void saveFromStub(IStub entity);
 }

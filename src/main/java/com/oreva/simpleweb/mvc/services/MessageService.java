@@ -27,9 +27,14 @@ public class MessageService extends EntityService {
     private ConversionService conversionService;
 
     @Override
+    public void save(IEntity entity) {
+        dao.save(entity);
+    }
+
+    @Override
     public void saveFromStub(IStub stub) {
         Message message = conversionService.convert(stub, Message.class);
 
-        dao.saveMessage(message);
+        dao.save(message);
     }
 }

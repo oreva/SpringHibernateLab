@@ -1,6 +1,8 @@
 package com.oreva.simpleweb.mvc.controllers;
 
+import com.oreva.simpleweb.mvc.entities.User;
 import com.oreva.simpleweb.mvc.services.MessageService;
+import com.oreva.simpleweb.mvc.services.UserService;
 import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,9 +21,6 @@ import javax.inject.Inject;
 @Controller
 @RequestMapping({"/","/home"})
 public class HomeController {
-
-    public HomeController() {
-    }
 
     //@RequestMapping({"/","/home"})
     @RequestMapping(method = RequestMethod.GET)
