@@ -5,6 +5,8 @@ import com.oreva.simpleweb.mvc.web.stubs.IStub;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,19 +17,49 @@ import javax.transaction.Transactional;
  */
 @Service
 @Transactional
-public abstract class EntityService implements IEntityService {
+public abstract class EntityService<E extends IEntity, S extends IStub>
+        implements IEntityService<E, S>, IEntityConversionProvider<E, S> {
     @Override
-    public IEntity getById() {
+    public E getById() {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void save(IEntity entity) {
+    public void save(E entity) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void saveFromStub(IStub stub) {
+    public void saveFromStub(S stub) {
+        E entity = convertStubToEntity(stub);
+        save(entity);
+    }
+
+    @Override
+    public S convertEntityToStub(E entity) {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public E convertStubToEntity(S stub) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public List<S> convertListOfEntities(List<E> entities) {
+        List<S> result = new LinkedList<S>();
+        for (E entity: entities) {
+            result.add(convertEntityToStub(entity));
+        }
+        return result;
+    }
+
+    @Override
+    public List<E> convertListOfStubs(List<S> stubs) {
+        List<E> result = new LinkedList<E>();
+        for (S stub: stubs) {
+            result.add(convertStubToEntity(stub));
+        }
+        return result;
     }
 }

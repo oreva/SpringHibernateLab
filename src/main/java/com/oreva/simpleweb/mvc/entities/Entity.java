@@ -11,11 +11,4 @@ import com.oreva.simpleweb.mvc.web.stubs.IStub;
  */
 public abstract class Entity implements IEntity {
 
-    /**
-     * @return null which means there is no way to convert to IStub
-     */
-    @Override
-    public IStub convertToStub() {
-        return null;
-    }
 }

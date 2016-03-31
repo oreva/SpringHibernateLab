@@ -10,12 +10,5 @@ import com.oreva.simpleweb.mvc.entities.IEntity;
  * To change this template use File | Settings | File Templates.
  */
 public abstract class Stub implements IStub {
-    /**
-     *
-     * @return null if there is no way to convert to IEntity
-     */
-    @Override
-    public IEntity convertToEntity() {
-        return null;
-    }
+
 }

@@ -49,8 +49,4 @@ public class Tag extends Entity {
         this.text = text;
     }
 
-    @Override
-    public IStub convertToStub() {
-        return new TagStub(this);
-    }
 }

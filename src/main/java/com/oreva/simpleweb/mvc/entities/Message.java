@@ -53,14 +53,6 @@ public class Message extends Entity {
     }
 
     @Override
-    public IStub convertToStub() {
-        MessageStub stub = new MessageStub();
-        stub.setId(id);
-        stub.setText(text);
-        return stub;
-    }
-
-    @Override
     public int hashCode() {
         return Objects.hash(id);
     }
@@ -70,7 +62,11 @@ public class Message extends Entity {
         if (this == obj) {
             return true;
         }
-        if (null == obj && getClass() != obj.getClass()) {
+        try {
+            if (null == obj && getClass() != obj.getClass()) {
+                return false;
+            }
+        } catch (Exception e) {
             return false;
         }
         Message m = (Message) obj;

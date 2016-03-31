@@ -93,15 +93,4 @@ public class User extends Entity {
         m.setUser(null);
     }
 
-    @Override
-    public IStub convertToStub() {
-        UserStub stub = new UserStub();
-        stub.setId(id);
-        stub.setFirstName(firstName);
-        stub.setLastName(lastName);
-        stub.setMail(mail);
-        stub.setPhone(phone);
-
-        return stub;
-    }
 }

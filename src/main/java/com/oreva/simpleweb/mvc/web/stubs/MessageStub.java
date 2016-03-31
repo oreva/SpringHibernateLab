@@ -18,25 +18,15 @@ public class MessageStub extends Stub {
 
     private Long id;
 
-    /*@NotNull
-    @Size(min = 2, max = 10,
-            message = "User phone must be between 2 and 10 characters long.")
-    @Pattern(regexp = "[0-9]+",
-            message = "User phone must contain only digit characters.")
-    private String phone;
-
-    @NotNull
-    @Size(min = 5, max = 50,
-            message = "User email must be between 5 and 50 character long.")
-    @Pattern(regexp = "(\\w)+@[a-zA-Z0-9]+(\\.[a-zA-Z]+)+",
-            message = "Invalid email format.")
-    private String mail;   */
-
     @NotNull
     @Size(min = 1,
-            max = 300,
-            message = "Message must be between 1 and 300 characters long.")
+            max = 250,
+            message = "Message must be between 1 and 250 characters long.")
     private String text;
+
+    private String userName;
+    private String userMail;
+    private String userPhone;
 
     public Long getId() {
         return id;
@@ -54,11 +44,28 @@ public class MessageStub extends Stub {
         this.text = text;
     }
 
-    @Override
-    public IEntity convertToEntity() {
-        Message entity = new Message();
-        entity.setId(id);
-        entity.setText(text);
-        return entity;
+    public String getUserName() {
+        return userName;
     }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserMail() {
+        return userMail;
+    }
+
+    public void setUserMail(String userMail) {
+        this.userMail = userMail;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
+
 }

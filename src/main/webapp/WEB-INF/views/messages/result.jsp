@@ -14,11 +14,12 @@
     <div>
         <h3>Your message has been successfully sent to our administrator. Thank you!</h3>
 
-        <form action="messages">
+        <form action="messages" method="GET">
             <input type="hidden" name="new" value="">
             <input type="submit" value="Create New Message">
         </form>
-        <form action="messages/list" method="GET">
+        <form action="messages" method="GET">
+            <input type="hidden" name="list" value="">
             <input type="submit" value="Read All Messages">
         </form>
     </div>

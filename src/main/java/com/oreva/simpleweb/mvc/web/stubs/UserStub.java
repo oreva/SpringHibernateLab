@@ -4,6 +4,9 @@ import com.oreva.simpleweb.mvc.entities.IEntity;
 import com.oreva.simpleweb.mvc.entities.Message;
 import com.oreva.simpleweb.mvc.entities.User;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,9 +19,30 @@ import java.util.List;
  */
 public class UserStub extends Stub {
     private Long id;
+
+    @NotNull
+    @Size(min = 1, max = 100,
+            message = "First name must be between 1 and 100 character long.")
+    @Pattern(regexp = "([a-zA-Z])+", message = "First name must contain only letters.")
     private String firstName;
+
+    @Size(min = 1, max = 100,
+            message = "Last name must be between 1 and 100 character long.")
+    @Pattern(regexp = "([a-zA-Z])+", message = "Last name must contain only letters.")
     private String lastName;
+
+    @NotNull
+    @Size(min = 2, max = 10,
+            message = "User phone must be between 2 and 10 characters long.")
+    @Pattern(regexp = "[0-9]+",
+            message = "User phone must contain only digit characters.")
     private String phone;
+
+    @NotNull
+    @Size(min = 5, max = 50,
+            message = "User email must be between 5 and 50 character long.")
+    @Pattern(regexp = "(\\w)+@[a-zA-Z0-9]+(\\.[a-zA-Z]+)+",
+            message = "Invalid email format.")
     private String mail;
 
     public Long getId() {
@@ -61,15 +85,4 @@ public class UserStub extends Stub {
         this.mail = mail;
     }
 
-    @Override
-    public IEntity convertToEntity() {
-        User user = new User();
-        user.setId(id);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setMail(mail);
-        user.setPhone(phone);
-
-        return user;
-    }
 }

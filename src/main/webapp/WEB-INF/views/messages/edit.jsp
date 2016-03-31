@@ -24,7 +24,7 @@
                 <table cellspacing="0">
                     <tr>
                         <th><label for="user_message">Message:</label></th>
-                        <td><sf:textarea path="text" maxlength="300"
+                        <td><sf:textarea path="text" maxlength="250"
                                          rows="5" cols="80"
                                          id="user_message"/>
                             <small id="msg_area">Enter you message</small><br/>

@@ -10,5 +10,4 @@ import com.oreva.simpleweb.mvc.web.stubs.IStub;
  * To change this template use File | Settings | File Templates.
  */
 public interface IEntity {
-    IStub convertToStub();
 }

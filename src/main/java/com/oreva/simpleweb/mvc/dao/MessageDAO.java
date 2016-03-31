@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,11 +19,8 @@ import javax.persistence.PersistenceContext;
 @Repository
 public class MessageDAO extends EntityDAO {
 
-    /*@PersistenceContext
-    EntityManager entityManager;
-
-    @Override
-    public void save(IEntity entity) {
-        entityManager.persist(entity);
-    }                           */
+    public List<Message> loadAllMessages() {
+        Query query = entityManager.createQuery("FROM Message");
+        return (List<Message>)query.getResultList();
+    }
 }

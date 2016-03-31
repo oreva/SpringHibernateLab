@@ -10,10 +10,12 @@ import com.oreva.simpleweb.mvc.web.stubs.IStub;
  * Time: 12:39 PM
  * To change this template use File | Settings | File Templates.
  */
-public interface IEntityService {
+public interface IEntityService<E extends IEntity, S extends IStub> {
 
-    IEntity getById();
+    E getById();
 
-    void save(IEntity entity);
-    void saveFromStub(IStub entity);
+    void save(E entity);
+    void saveFromStub(S entity);
+
+
 }

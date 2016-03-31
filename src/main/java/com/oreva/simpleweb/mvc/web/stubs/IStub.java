@@ -10,5 +10,4 @@ import com.oreva.simpleweb.mvc.entities.IEntity;
  * To change this template use File | Settings | File Templates.
  */
 public interface IStub {
-    IEntity convertToEntity();
 }

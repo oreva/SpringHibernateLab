@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
 @Repository
 public abstract class EntityDAO implements IEntityDAO {
     @PersistenceContext
-    EntityManager entityManager;
+    protected EntityManager entityManager;
 
     @Override
     public void save(IEntity entity) {

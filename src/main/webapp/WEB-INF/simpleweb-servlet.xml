@@ -69,20 +69,4 @@
         <aop:advisor advice-ref="txAdvice" pointcut-ref="defaultServiceOperation"/>
     </aop:config>        -->
 
-    <!-- Conversion Service -->
-    <bean id="conversionService"
-          class="org.springframework.context.support.ConversionServiceFactoryBean">
-        <property name="converters">
-            <set>
-                <bean class="com.oreva.simpleweb.mvc.converters.EntityToStubConverterFactory"/>
-                <bean class="com.oreva.simpleweb.mvc.converters.EntityFromStubConverterFactory"/>
-            </set>
-        </property>
-    </bean>
-
-    <bean id="collectionConverter"
-          class="org.springframework.core.convert.support.CollectionToCollectionConverter">
-        <constructor-arg name="conversionService" ref="conversionService"/>
-    </bean>
-
 </beans>

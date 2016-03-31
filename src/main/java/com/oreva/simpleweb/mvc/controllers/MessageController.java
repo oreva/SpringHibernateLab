@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,23 +32,25 @@ public class MessageController {
     @Inject
     private UserService userService;
 
-    //@RequestMapping(method = RequestMethod.GET, params = "new")
-    //@RequestMapping(value = "/edit", method = RequestMethod.GET)
     @RequestMapping(method = RequestMethod.GET, params = "new")
     public String storeMessage(Model model) {
         model.addAttribute(new MessageStub());
 
-        //new user (temp code)
-        User user = new User();
-        user.setMail("oreva@gmail.com");
-        user.setPhone("3510975");
-        user.setFirstName("Olga");
-        user.setLastName("Reva");
-        userService.save(user);
-        userService.setCurrentUser(user);
-
         return "messages/edit";
     }
+
+    @RequestMapping(method = RequestMethod.GET, params = "list")
+    public String showAllMessagesPage(Model model) {
+        List<Message> sources = messageService.loadAllMessages();
+        List<MessageStub> messages = messageService.convertListOfEntities(sources);
+        model.addAttribute("messages", messages);
+        return "messages/list";
+    }
+
+    /*@RequestMapping(value = "/list", method = RequestMethod.POST)
+    public String showAllMessages() {
+        return "redirect:list";
+    } */
 
     @RequestMapping(method=RequestMethod.POST)
     public String addMessageFromForm(@Valid MessageStub messageStub,
@@ -56,7 +60,7 @@ public class MessageController {
         }
 
         User user = userService.getCurrentUser();
-        Message message = (Message) messageStub.convertToEntity();
+        Message message = messageService.convertStubToEntity(messageStub);
         user.addMessage(message);
         messageService.save(message);
 
@@ -64,12 +68,7 @@ public class MessageController {
     }
 
     @RequestMapping(value = "/result", method = RequestMethod.GET)
-    public String showResultPage(Model model) {
+    public String showResultPage() {
         return "messages/result";
     }
-
-    /*@RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String showAllMessages(Model model) {
-        return "messages/list";
-    }     */
 }

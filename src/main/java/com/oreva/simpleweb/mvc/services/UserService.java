@@ -19,7 +19,7 @@ import javax.transaction.Transactional;
  */
 @Service
 @Transactional
-public class UserService extends EntityService {
+public class UserService extends EntityService<User, UserStub> {
     @Inject
     private UserDAO dao;
 
@@ -33,18 +33,30 @@ public class UserService extends EntityService {
         currentUser = user;
     }
 
-    public UserStub getCurrentUserStub() {
-        return (UserStub) currentUser.convertToStub();
-    }
-
     @Override
-    public void save(IEntity entity) {
+    public void save(User entity) {
         dao.save(entity);
     }
 
     @Override
-    public void saveFromStub(IStub stub) {
-        User user = (User) stub.convertToEntity();
-        dao.save(user);
+    public UserStub convertEntityToStub(User entity) {
+        UserStub stub = new UserStub();
+        stub.setId(entity.getId());
+        stub.setFirstName(entity.getFirstName());
+        stub.setLastName(entity.getLastName());
+        stub.setMail(entity.getMail());
+        stub.setPhone(entity.getPhone());
+        return stub;
+    }
+
+    @Override
+    public User convertStubToEntity(UserStub stub) {
+        User user = new User();
+        user.setId(stub.getId());
+        user.setFirstName(stub.getFirstName());
+        user.setLastName(stub.getLastName());
+        user.setMail(stub.getMail());
+        user.setPhone(stub.getPhone());
+        return user;
     }
 }
