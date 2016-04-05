@@ -27,7 +27,7 @@ public class MessageService extends EntityService<Message, MessageStub> {
     private MessageDAO dao;
 
     @Inject
-    private ConversionService conversionService;
+    private UserService userService;
 
     @Override
     public void save(Message entity) {
@@ -38,6 +38,12 @@ public class MessageService extends EntityService<Message, MessageStub> {
         return dao.loadAllMessages();
     }
 
+    public void newMessage(Message message) {
+        User user = userService.getCurrentUser();
+        message.setUser(user);
+        dao.save(message);
+    }
+
     @Override
     public MessageStub convertEntityToStub(Message entity) {
         MessageStub stub = new MessageStub();
@@ -45,6 +51,7 @@ public class MessageService extends EntityService<Message, MessageStub> {
         stub.setText(entity.getText());
 
         User user = entity.getUser();
+        stub.setUserId(user.getId());
         stub.setUserMail(user.getMail());
         stub.setUserPhone(user.getPhone());
         stub.setUserName(user.getFirstName() + " " + user.getLastName());

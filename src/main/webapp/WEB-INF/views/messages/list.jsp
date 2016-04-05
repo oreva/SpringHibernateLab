@@ -17,6 +17,7 @@
         <h3>You can find all stored messages below</h3>
         <table border="1">
             <tr>
+                <th width="50">User ID</th>
                 <th width="150">User Name</th>
                 <th width="150">User Mail</th>
                 <th width="150">User Phone</th>
@@ -24,6 +25,7 @@
             </tr>
             <c:forEach items="${messages}" var="message">
                 <tr>
+                    <td>${message.userId}</td>
                     <td>${message.userName}</td>
                     <td>${message.userMail}</td>
                     <td>${message.userPhone}</td>

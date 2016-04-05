@@ -17,10 +17,10 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Repository
-public class MessageDAO extends EntityDAO {
+public class MessageDAO extends EntityDAO<Message> {
 
     public List<Message> loadAllMessages() {
         Query query = entityManager.createQuery("FROM Message");
-        return (List<Message>)query.getResultList();
+        return query.getResultList();
     }
 }

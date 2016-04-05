@@ -12,7 +12,7 @@ import com.oreva.simpleweb.mvc.web.stubs.IStub;
  */
 public interface IEntityService<E extends IEntity, S extends IStub> {
 
-    E getById();
+    E getById(Long id);
 
     void save(E entity);
     void saveFromStub(S entity);

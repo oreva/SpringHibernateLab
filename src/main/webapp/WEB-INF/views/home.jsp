@@ -18,8 +18,27 @@
             <input type="submit" value="New Message">
         </form>-->
 
-        <h3>Please, fill the form below to send messages to our administrator</h3>
+        <h3>Enter user id to login</h3>
+        <sf:form method="POST" modelAttribute="userStub">
+            <fieldset>
+                <table cellspacing="0">
+                    <tr>
+                        <th><label for="user_id">User ID</label></th>
+                        <td><sf:input path="id" size="10" id="user_id" maxlength="10"/>
+                            <small>Enter existing user id</small><br>
+                            <small>${errorStr}</small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <sf:button value="">Login</sf:button>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </sf:form>
 
+        <h3>Or fill the form below to create new account</h3>
         <sf:form method="POST" modelAttribute="userStub">
             <fieldset>
                 <table cellspacing="0">
@@ -55,7 +74,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <sf:button value="">Login</sf:button>
+                            <sf:button value="">Create account</sf:button>
                         </td>
                     </tr>
             </fieldset>

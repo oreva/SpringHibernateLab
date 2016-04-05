@@ -9,6 +9,8 @@ import com.oreva.simpleweb.mvc.entities.IEntity;
  * Time: 10:43 AM
  * To change this template use File | Settings | File Templates.
  */
-public interface IEntityDAO {
-    void save(IEntity entity);
+public interface IEntityDAO<E extends IEntity> {
+
+    E getById(Long id);
+    void save(E entity);
 }

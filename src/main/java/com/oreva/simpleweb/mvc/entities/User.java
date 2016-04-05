@@ -5,6 +5,7 @@ import com.oreva.simpleweb.mvc.web.stubs.MessageStub;
 import com.oreva.simpleweb.mvc.web.stubs.UserStub;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,7 +37,8 @@ public class User extends Entity {
     @Column(name = "mail")
     private String mail;
 
-    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY)
     private List<Message> messages = new LinkedList<Message>();
 
     public Long getId() {
@@ -83,7 +85,7 @@ public class User extends Entity {
         return messages;
     }
 
-    public void addMessage(Message m) {
+    /*public void addMessage(Message m) {
         messages.add(m);
         m.setUser(this);
     }
@@ -91,6 +93,6 @@ public class User extends Entity {
     public void removeMessage(Message m) {
         messages.remove(m);
         m.setUser(null);
-    }
+    } */
 
 }

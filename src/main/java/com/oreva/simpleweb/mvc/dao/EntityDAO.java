@@ -14,12 +14,17 @@ import javax.persistence.PersistenceContext;
  * To change this template use File | Settings | File Templates.
  */
 @Repository
-public abstract class EntityDAO implements IEntityDAO {
+public abstract class EntityDAO<E extends IEntity> implements IEntityDAO<E> {
     @PersistenceContext
     protected EntityManager entityManager;
 
     @Override
-    public void save(IEntity entity) {
+    public E getById(Long id) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void save(E entity) {
         entityManager.persist(entity);
     }
 }

@@ -24,6 +24,7 @@ public class MessageStub extends Stub {
             message = "Message must be between 1 and 250 characters long.")
     private String text;
 
+    private Long userId;
     private String userName;
     private String userMail;
     private String userPhone;
@@ -42,6 +43,14 @@ public class MessageStub extends Stub {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {

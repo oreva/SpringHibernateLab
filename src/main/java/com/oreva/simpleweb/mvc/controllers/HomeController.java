@@ -36,15 +36,41 @@ public class HomeController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String processUserLogin(@Valid UserStub userStub, Errors errors) {
+    public String processUserLogin(Model model,
+                                   @Valid UserStub userStub,
+                                   Errors errors) {
+        String currentPage = "home";
+        String nextPage = "messages/result";//"redirect:messages?new=";
+
+        Long enteredID = userStub.getId();
+        if (null != enteredID && 0 < enteredID && 100 > enteredID) {
+            if (loginAsExistingUser(enteredID)) {
+                //model.addAttribute("userId", enteredID);
+                return nextPage;
+            }
+            model.addAttribute("errorStr", "There is no registered user with entered id");
+            return currentPage;
+        }
+        model.addAttribute("errorStr", "");
         if (errors.hasErrors()) {
-            return "home";
+            return currentPage;
         }
         //Save user information
         User user = userService.convertStubToEntity(userStub);
         userService.save(user);
         userService.setCurrentUser(user);
 
-        return "redirect:messages?new=";
+        //model.addAttribute("userId", user.getId());
+
+        return nextPage;
+    }
+
+    private Boolean loginAsExistingUser(Long userID) {
+        User user = userService.getById(userID);
+        if (null != user) {
+            userService.setCurrentUser(user);
+            return true;
+        }
+        return false;
     }
 }

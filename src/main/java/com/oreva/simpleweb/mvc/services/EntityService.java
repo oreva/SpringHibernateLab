@@ -20,7 +20,7 @@ import java.util.List;
 public abstract class EntityService<E extends IEntity, S extends IStub>
         implements IEntityService<E, S>, IEntityConversionProvider<E, S> {
     @Override
-    public E getById() {
+    public E getById(Long id) {
         throw new UnsupportedOperationException();
     }
 

@@ -2,6 +2,7 @@ package com.oreva.simpleweb.mvc.services;
 
 import com.oreva.simpleweb.mvc.dao.UserDAO;
 import com.oreva.simpleweb.mvc.entities.IEntity;
+import com.oreva.simpleweb.mvc.entities.Message;
 import com.oreva.simpleweb.mvc.entities.User;
 import com.oreva.simpleweb.mvc.web.stubs.IStub;
 import com.oreva.simpleweb.mvc.web.stubs.UserStub;
@@ -34,6 +35,15 @@ public class UserService extends EntityService<User, UserStub> {
     }
 
     @Override
+    public User getById(Long id) {
+        return dao.getById(id);
+    }
+
+    public User getUserWithMessages(Long userId) {
+        return dao.getUserWithMessages(userId);
+    }
+
+    @Override
     public void save(User entity) {
         dao.save(entity);
     }
@@ -59,4 +69,8 @@ public class UserService extends EntityService<User, UserStub> {
         user.setPhone(stub.getPhone());
         return user;
     }
+
+    /*public void addMessageToCurrentUser(Message message) {
+        currentUser.addMessage(message);
+    } */
 }
