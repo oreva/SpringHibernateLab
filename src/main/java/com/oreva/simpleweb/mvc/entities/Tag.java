@@ -3,10 +3,9 @@ package com.oreva.simpleweb.mvc.entities;
 import com.oreva.simpleweb.mvc.web.stubs.IStub;
 import com.oreva.simpleweb.mvc.web.stubs.TagStub;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,11 +25,13 @@ public class Tag extends Entity {
     @Column(name = "text")
     private String text;
 
+    @ManyToMany(mappedBy = "tags")//, fetch = FetchType.LAZY)
+    private List<Message> messages = new ArrayList<Message>();
+
     public Tag() {}
 
-    public Tag(TagStub stub) {
-        id = stub.getId();
-        text = stub.getText();
+    public Tag(String tag) {
+        text = tag;
     }
 
     public Long getId() {
@@ -49,4 +50,7 @@ public class Tag extends Entity {
         this.text = text;
     }
 
+    public List<Message> getMessages() {
+        return messages;
+    }
 }

@@ -24,16 +24,6 @@ public class UserService extends EntityService<User, UserStub> {
     @Inject
     private UserDAO dao;
 
-    private User currentUser;
-
-    public User getCurrentUser() {
-        return currentUser;
-    }
-
-    public void setCurrentUser(User user) {
-        currentUser = user;
-    }
-
     @Override
     public User getById(Long id) {
         return dao.getById(id);
@@ -69,8 +59,4 @@ public class UserService extends EntityService<User, UserStub> {
         user.setPhone(stub.getPhone());
         return user;
     }
-
-    /*public void addMessageToCurrentUser(Message message) {
-        currentUser.addMessage(message);
-    } */
 }

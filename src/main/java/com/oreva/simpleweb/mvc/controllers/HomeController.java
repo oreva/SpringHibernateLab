@@ -12,6 +12,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -25,6 +26,7 @@ import javax.validation.Valid;
  */
 @Controller
 @RequestMapping({"/","/home"})
+@SessionAttributes({"user"})
 public class HomeController {
     @Inject
     private UserService userService;
@@ -40,12 +42,11 @@ public class HomeController {
                                    @Valid UserStub userStub,
                                    Errors errors) {
         String currentPage = "home";
-        String nextPage = "messages/result";//"redirect:messages?new=";
+        String nextPage = "messages/result";
 
         Long enteredID = userStub.getId();
         if (null != enteredID && 0 < enteredID && 100 > enteredID) {
-            if (loginAsExistingUser(enteredID)) {
-                //model.addAttribute("userId", enteredID);
+            if (loginAsExistingUser(model, enteredID)) {
                 return nextPage;
             }
             model.addAttribute("errorStr", "There is no registered user with entered id");
@@ -58,17 +59,15 @@ public class HomeController {
         //Save user information
         User user = userService.convertStubToEntity(userStub);
         userService.save(user);
-        userService.setCurrentUser(user);
-
-        //model.addAttribute("userId", user.getId());
+        model.addAttribute("user", user);
 
         return nextPage;
     }
 
-    private Boolean loginAsExistingUser(Long userID) {
+    private Boolean loginAsExistingUser(Model model, Long userID) {
         User user = userService.getById(userID);
         if (null != user) {
-            userService.setCurrentUser(user);
+            model.addAttribute("user", user);
             return true;
         }
         return false;

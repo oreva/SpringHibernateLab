@@ -7,7 +7,6 @@ import com.oreva.simpleweb.mvc.entities.User;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.LinkedList;
 import java.util.List;
 
 /**

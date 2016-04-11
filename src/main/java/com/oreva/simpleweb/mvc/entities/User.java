@@ -6,8 +6,8 @@ import com.oreva.simpleweb.mvc.web.stubs.UserStub;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -39,7 +39,7 @@ public class User extends Entity {
 
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL,
         fetch = FetchType.LAZY)
-    private List<Message> messages = new LinkedList<Message>();
+    private List<Message> messages = new ArrayList<Message>();
 
     public Long getId() {
         return id;

@@ -5,6 +5,7 @@ import com.oreva.simpleweb.mvc.entities.Message;
 import com.oreva.simpleweb.mvc.entities.User;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -28,6 +29,10 @@ public class MessageStub extends Stub {
     private String userName;
     private String userMail;
     private String userPhone;
+    // comma-separated string of related tags
+    @Pattern(regexp = "(([a-zA-Z0-9])+(\\,)*)+",
+            message = "Tags must be comma separated")
+    private String tagString = "";
 
     public Long getId() {
         return id;
@@ -77,4 +82,11 @@ public class MessageStub extends Stub {
         this.userPhone = userPhone;
     }
 
+    public String getTagString() {
+        return tagString;
+    }
+
+    public void setTagString(String tagString) {
+        this.tagString = tagString;
+    }
 }

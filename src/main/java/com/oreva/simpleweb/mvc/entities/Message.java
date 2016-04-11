@@ -5,6 +5,8 @@ import com.oreva.simpleweb.mvc.web.stubs.MessageStub;
 
 import javax.inject.Inject;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -28,6 +30,9 @@ public class Message extends Entity {
     @ManyToOne
     private User user;
 
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)//, fetch = FetchType.LAZY)
+    private List<Tag> tags = new ArrayList<Tag>();
+
     public Long getId() {
         return id;
     }
@@ -50,6 +55,26 @@ public class Message extends Entity {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void addTag(Tag tag) {
+        tags.add(tag);
+        tag.getMessages().add(this);
+    }
+
+    public void removeTag(Tag tag) {
+        tags.remove(tag);
+        tag.getMessages().remove( this );
+    }
+
+    public void addTags(List<Tag> tagList) {
+        for (Tag t: tagList) {
+            addTag(t);
+        }
     }
 
     @Override

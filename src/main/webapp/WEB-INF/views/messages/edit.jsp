@@ -32,6 +32,15 @@
                         </td>
                     </tr>
                     <tr>
+                        <th><label for="message_tags">Tags:</label></th>
+                        <td><sf:textarea path="tagString" maxlength="1000"
+                                         rows="5" cols="80"
+                                         id="message_tags"/>
+                            <small id="tags_area">Enter message tags</small><br/>
+                            <sf:errors path="tagString" cssClass="error"/>
+                        </td>
+                    </tr>
+                    <tr>
                         <td><sf:button value="">Send Message</sf:button>
                         </td>
                     </tr>

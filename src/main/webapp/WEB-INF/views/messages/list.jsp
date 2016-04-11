@@ -22,6 +22,7 @@
                 <th width="150">User Mail</th>
                 <th width="150">User Phone</th>
                 <th width="250">Message</th>
+                <th width="350">Tags</th>
             </tr>
             <c:forEach items="${messages}" var="message">
                 <tr>
@@ -30,6 +31,7 @@
                     <td>${message.userMail}</td>
                     <td>${message.userPhone}</td>
                     <td>${message.text}</td>
+                    <td>${message.tagString}</td>
                 </tr>
             </c:forEach>
         </table>

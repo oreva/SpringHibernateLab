@@ -1,23 +1,26 @@
 package com.oreva.simpleweb.mvc.controllers;
 
 import com.oreva.simpleweb.mvc.entities.Message;
+import com.oreva.simpleweb.mvc.entities.Tag;
 import com.oreva.simpleweb.mvc.entities.User;
 import com.oreva.simpleweb.mvc.services.MessageService;
+import com.oreva.simpleweb.mvc.services.TagService;
 import com.oreva.simpleweb.mvc.services.UserService;
 import com.oreva.simpleweb.mvc.web.stubs.MessageStub;
 import com.oreva.simpleweb.mvc.web.stubs.UserStub;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -29,11 +32,14 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/messages")
+@SessionAttributes({"user"})
 public class MessageController {
     @Inject
     private MessageService messageService;
     @Inject
     private UserService userService;
+    @Inject
+    private TagService tagService;
 
     @RequestMapping(method = RequestMethod.GET, params = "new")
     public String storeMessage(Model model) {
@@ -43,8 +49,8 @@ public class MessageController {
     }
 
     @RequestMapping(method = RequestMethod.GET, params = "listCurrent")
-    public String showCurrentUserMessages(Model model) {
-        return showUserMessages(userService.getCurrentUser().getId(), model);
+    public String showCurrentUserMessages(Model model, @ModelAttribute User user) {
+        return showUserMessages(user.getId(), model);
     }
 
     @RequestMapping(method = RequestMethod.GET, params = "list")
@@ -66,28 +72,21 @@ public class MessageController {
 
     public String showUserMessages(Long userId, Model model) {
         User user = userService.getUserWithMessages(userId);
-        List<Message> sources = (null != user) ? user.getMessages() : new LinkedList<Message>();
+        List<Message> sources = (null != user) ? user.getMessages() : new ArrayList<Message>();
         List<MessageStub> messages = messageService.convertListOfEntities(sources);
         model.addAttribute("messages", messages);
         return "messages/list";
     }
 
     @RequestMapping(method=RequestMethod.POST)
-    public String addMessageFromForm(@Valid MessageStub messageStub,
+    public String addMessageFromForm(@ModelAttribute User user,
+                                     @Valid MessageStub messageStub,
                                      Errors errors) {
         if(errors.hasErrors()) {
             return "messages/edit";
         }
-
-        Message message = messageService.convertStubToEntity(messageStub);
-        messageService.newMessage(message);
+        messageService.newMessage(messageStub, user);
 
         return "messages/result";
     }
-
-    /*@RequestMapping(value = "/result", method = RequestMethod.GET)
-    public String showResultPage(Model model) {
-        model.addAttribute("userId", userService.getCurrentUser().getId());
-        return "messages/result";
-    }*/
 }

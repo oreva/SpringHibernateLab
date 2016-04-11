@@ -22,7 +22,7 @@ import javax.persistence.criteria.Root;
 public class UserDAO extends EntityDAO<User> {
     @Override
     public User getById(Long id) {
-        Query query = entityManager.createQuery("FROM User where id = :idParam")
+        Query query = entityManager.createQuery("from User where id = :idParam")
                 .setParameter("idParam", id);
         Object result = null;
         try {
@@ -33,7 +33,7 @@ public class UserDAO extends EntityDAO<User> {
         return (User) result;
     }
 
-    public User getUserWithMessages(Long userId) {
+    /*public User getUserWithMessages(Long userId) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery(User.class);
         Root<User> root = query.from(User.class);
@@ -46,6 +46,24 @@ public class UserDAO extends EntityDAO<User> {
         User user;
         try {
             user = entityManager.createQuery(query).getSingleResult();
+        } catch (NoResultException e) {
+            user = null;
+        }
+        return user;
+    }*/
+
+    public User getUserWithMessages(Long userId) {
+        Query query = entityManager.createQuery(
+                "select u " +
+                        "from User u " +
+                        "left join fetch u.messages " +
+                        "where u.id = :userId",
+                User.class)
+                .setParameter( "userId", userId);
+
+        User user;
+        try {
+            user = (User) query.getSingleResult();
         } catch (NoResultException e) {
             user = null;
         }

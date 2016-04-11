@@ -5,7 +5,7 @@ import com.oreva.simpleweb.mvc.web.stubs.IStub;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,7 +47,7 @@ public abstract class EntityService<E extends IEntity, S extends IStub>
 
     @Override
     public List<S> convertListOfEntities(List<E> entities) {
-        List<S> result = new LinkedList<S>();
+        List<S> result = new ArrayList<S>();
         for (E entity: entities) {
             result.add(convertEntityToStub(entity));
         }
@@ -56,7 +56,7 @@ public abstract class EntityService<E extends IEntity, S extends IStub>
 
     @Override
     public List<E> convertListOfStubs(List<S> stubs) {
-        List<E> result = new LinkedList<E>();
+        List<E> result = new ArrayList<E>();
         for (S stub: stubs) {
             result.add(convertStubToEntity(stub));
         }

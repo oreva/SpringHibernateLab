@@ -18,11 +18,6 @@ public class TagStub extends Stub {
 
     }
 
-    public TagStub(Tag tag) {
-        id = tag.getId();
-        text = tag.getText();
-    }
-
     public Long getId() {
         return id;
     }
