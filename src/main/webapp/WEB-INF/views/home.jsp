@@ -20,6 +20,7 @@
 
         <h3>Enter user id to login</h3>
         <sf:form method="POST" modelAttribute="userStub">
+            <input type="hidden" name="login" value=""/>
             <fieldset>
                 <table cellspacing="0">
                     <tr>
@@ -40,6 +41,7 @@
 
         <h3>Or fill the form below to create new account</h3>
         <sf:form method="POST" modelAttribute="userStub">
+            <input type="hidden" name="register" value=""/>
             <fieldset>
                 <table cellspacing="0">
                     <tr>

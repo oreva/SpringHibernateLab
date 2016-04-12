@@ -14,6 +14,9 @@
 </head>
 <body>
     <div>
+        <!--<form action="messages/result" method="GET">
+            <input type="submit" value="Back"/>
+        </form>-->
         <h3>You can find all stored messages below</h3>
         <table border="1">
             <tr>

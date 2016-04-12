@@ -89,4 +89,9 @@ public class MessageController {
 
         return "messages/result";
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/result")
+    public String showResultPage() {
+        return "messages/result";
+    }
 }

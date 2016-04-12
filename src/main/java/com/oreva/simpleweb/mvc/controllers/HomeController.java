@@ -37,22 +37,33 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public String processUserLogin(Model model,
-                                   @Valid UserStub userStub,
-                                   Errors errors) {
+    @RequestMapping(method = RequestMethod.POST, params = "login")
+    public String login(Model model,
+                       @Valid UserStub userStub,
+                       Errors errors) {
         String currentPage = "home";
         String nextPage = "messages/result";
 
         Long enteredID = userStub.getId();
         if (null != enteredID && 0 < enteredID && 100 > enteredID) {
-            if (loginAsExistingUser(model, enteredID)) {
+            User user = userService.getById(enteredID);
+            if (null != user) {
+                model.addAttribute("user", user);
                 return nextPage;
+            } else {
+                model.addAttribute("errorStr", "There is no registered user with entered id");
             }
-            model.addAttribute("errorStr", "There is no registered user with entered id");
-            return currentPage;
         }
-        model.addAttribute("errorStr", "");
+        return currentPage;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, params = "register")
+    public String register(Model model,
+                           @Valid UserStub userStub,
+                           Errors errors) {
+        String currentPage = "home";
+        String nextPage = "messages/result";
+
         if (errors.hasErrors()) {
             return currentPage;
         }
@@ -62,14 +73,5 @@ public class HomeController {
         model.addAttribute("user", user);
 
         return nextPage;
-    }
-
-    private Boolean loginAsExistingUser(Model model, Long userID) {
-        User user = userService.getById(userID);
-        if (null != user) {
-            model.addAttribute("user", user);
-            return true;
-        }
-        return false;
     }
 }
