@@ -14,19 +14,19 @@
     <div>
         <h3>Please, select one of the following actions:</h3>
 
-        <form action="messages" method="GET">
-            <input type="hidden" name="new" value="">
+        <form action="new" method="GET">
+            <!--<input type="hidden" name="new" value="">-->
             <input type="submit" value="Create New Message">
         </form>
-        <form action="messages" method="GET">
+        <form action="list" method="GET">
             <input type="hidden" name="listCurrent" value="">
             <input type="submit" value="Read Your Messages">
         </form>
-        <form action="messages" method="GET">
+        <form action="list" method="GET">
             <input type="hidden" name="list" value="">
             <input type="submit" value="Read All Messages">
         </form>
-        <form action="messages" method="GET">
+        <form action="list" method="GET">
             <table cellspacing="0">
                 <tr>
                     <jsp:text>Read Messages for user with id =</jsp:text>

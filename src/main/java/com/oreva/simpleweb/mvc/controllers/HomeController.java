@@ -44,7 +44,7 @@ public class HomeController {
                        @Valid UserStub userStub,
                        Errors errors) {
         String currentPage = "home";
-        String nextPage = "messages/result";
+        String nextPage = "redirect:/messages/result";
 
         Long enteredID = userStub.getId();
         if (null != enteredID && 0 < enteredID && 100 > enteredID) {
@@ -57,23 +57,5 @@ public class HomeController {
             }
         }
         return currentPage;
-    }
-
-    @RequestMapping(method = RequestMethod.POST, params = "register")
-    public String register(Model model,
-                           @Valid UserStub userStub,
-                           Errors errors) {
-        String currentPage = "home";
-        String nextPage = "messages/result";
-
-        if (errors.hasErrors()) {
-            return currentPage;
-        }
-        //Save user information
-        User user = userService.convertStubToEntity(userStub);
-        userService.save(user);
-        model.addAttribute("user", user);
-
-        return nextPage;
     }
 }

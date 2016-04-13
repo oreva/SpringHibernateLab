@@ -43,19 +43,20 @@ public class MessageController {
     @Inject
     private TagService tagService;
 
-    @RequestMapping(method = RequestMethod.GET, params = "new")
+    //@RequestMapping(method = RequestMethod.GET, params = "new")
+    @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String storeMessage(Model model) {
         model.addAttribute(new MessageStub());
 
         return "messages/edit";
     }
 
-    @RequestMapping(method = RequestMethod.GET, params = "listCurrent")
+    @RequestMapping(value = "list", method = RequestMethod.GET, params = "listCurrent")
     public String showCurrentUserMessages(Model model, @ModelAttribute User user) {
         return showUserMessages(user.getId(), model);
     }
 
-    @RequestMapping(method = RequestMethod.GET, params = "list")
+    @RequestMapping(value = "list", method = RequestMethod.GET, params = "list")
     public String showMessages(Model model, HttpServletRequest request) {
         String userIdString = request.getParameter("list");
         try {
@@ -80,7 +81,7 @@ public class MessageController {
         return "messages/list";
     }
 
-    @RequestMapping(method=RequestMethod.POST)
+    @RequestMapping(value = "/new", method=RequestMethod.POST)
     public String addMessageFromForm(@ModelAttribute User user,
                                      @Valid MessageStub messageStub,
                                      Errors errors) {
@@ -89,7 +90,7 @@ public class MessageController {
         }
         messageService.newMessage(messageStub, user);
 
-        return "messages/result";
+        return "redirect:/messages/result";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/result")
