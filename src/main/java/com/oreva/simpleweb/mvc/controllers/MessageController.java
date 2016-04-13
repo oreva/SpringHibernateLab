@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -31,6 +32,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Controller
+@Transactional
 @RequestMapping("/messages")
 @SessionAttributes({"user"})
 public class MessageController {

@@ -25,7 +25,7 @@ public class Tag extends Entity {
     @Column(name = "text")
     private String text;
 
-    @ManyToMany(mappedBy = "tags")//, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
     private List<Message> messages = new ArrayList<Message>();
 
     public Tag() {}

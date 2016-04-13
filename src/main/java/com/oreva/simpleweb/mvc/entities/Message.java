@@ -30,7 +30,7 @@ public class Message extends Entity {
     @ManyToOne
     private User user;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)//, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<Tag> tags = new ArrayList<Tag>();
 
     public Long getId() {

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 /**
@@ -25,6 +26,7 @@ import javax.validation.Valid;
  * To change this template use File | Settings | File Templates.
  */
 @Controller
+@Transactional
 @RequestMapping({"/","/home"})
 @SessionAttributes({"user"})
 public class HomeController {
