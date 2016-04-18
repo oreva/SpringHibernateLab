@@ -1,4 +1,4 @@
-package com.oreva.simpleweb.mvc.web.stubs;
+package com.oreva.simpleweb.mvc.web.dto;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
  * Time: 12:34 PM
  * To change this template use File | Settings | File Templates.
  */
-public class UserStub extends Stub {
+public class UserDTO extends DTO {
     @Digits(integer = 5, fraction = 0)
     private Long id;
 

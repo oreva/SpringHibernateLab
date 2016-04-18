@@ -1,13 +1,11 @@
 package com.oreva.simpleweb.mvc.controllers;
 
 import com.oreva.simpleweb.mvc.entities.Message;
-import com.oreva.simpleweb.mvc.entities.Tag;
 import com.oreva.simpleweb.mvc.entities.User;
 import com.oreva.simpleweb.mvc.services.MessageService;
 import com.oreva.simpleweb.mvc.services.TagService;
 import com.oreva.simpleweb.mvc.services.UserService;
-import com.oreva.simpleweb.mvc.web.stubs.MessageStub;
-import com.oreva.simpleweb.mvc.web.stubs.UserStub;
+import com.oreva.simpleweb.mvc.web.dto.MessageDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -21,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 /**
@@ -46,7 +43,7 @@ public class MessageController {
     //@RequestMapping(method = RequestMethod.GET, params = "new")
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String storeMessage(Model model) {
-        model.addAttribute(new MessageStub());
+        model.addAttribute("messageStub", new MessageDTO());
 
         return "messages/edit";
     }
@@ -68,7 +65,7 @@ public class MessageController {
 
         // Show all messages
         List<Message> sources = messageService.loadAllMessages();
-        List<MessageStub> messages = messageService.convertListOfEntities(sources);
+        List<MessageDTO> messages = messageService.convertListOfEntities(sources);
         model.addAttribute("messages", messages);
         return "messages/list";
     }
@@ -76,14 +73,14 @@ public class MessageController {
     public String showUserMessages(Long userId, Model model) {
         User user = userService.getUserWithMessages(userId);
         List<Message> sources = (null != user) ? user.getMessages() : new ArrayList<Message>();
-        List<MessageStub> messages = messageService.convertListOfEntities(sources);
+        List<MessageDTO> messages = messageService.convertListOfEntities(sources);
         model.addAttribute("messages", messages);
         return "messages/list";
     }
 
     @RequestMapping(value = "/new", method=RequestMethod.POST)
     public String addMessageFromForm(@ModelAttribute User user,
-                                     @Valid MessageStub messageStub,
+                                     @Valid MessageDTO messageStub,
                                      Errors errors) {
         if(errors.hasErrors()) {
             return "messages/edit";

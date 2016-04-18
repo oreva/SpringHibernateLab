@@ -1,7 +1,7 @@
 package com.oreva.simpleweb.mvc.services;
 
 import com.oreva.simpleweb.mvc.entities.IEntity;
-import com.oreva.simpleweb.mvc.web.stubs.IStub;
+import com.oreva.simpleweb.mvc.web.dto.IDTO;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * Time: 12:01 PM
  * To change this template use File | Settings | File Templates.
  */
-public interface IEntityConversionProvider<E extends IEntity, S extends IStub> {
+public interface IEntityConversionProvider<E extends IEntity, S extends IDTO> {
 
     S convertEntityToStub(E entity);
     E convertStubToEntity(S stub);

@@ -1,7 +1,7 @@
 package com.oreva.simpleweb.mvc.services;
 
 import com.oreva.simpleweb.mvc.entities.IEntity;
-import com.oreva.simpleweb.mvc.web.stubs.IStub;
+import com.oreva.simpleweb.mvc.web.dto.IDTO;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public abstract class EntityService<E extends IEntity, S extends IStub>
+public abstract class EntityService<E extends IEntity, S extends IDTO>
         implements IEntityService<E, S>, IEntityConversionProvider<E, S> {
     @Override
     public E getById(Long id) {

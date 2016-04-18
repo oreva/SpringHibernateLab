@@ -147,7 +147,16 @@
           <artifactId>hibernate-validator</artifactId>
           <version>5.0.1.Final</version>
       </dependency>
+
+      <!-- Dozer Framework for entity to DTO (and vice versa) conversion -->
+      <dependency>
+          <groupId>net.sf.dozer</groupId>
+          <artifactId>dozer</artifactId>
+          <version>5.5.1</version>
+      </dependency>
   </dependencies>
+
+
 
   <build>
     <finalName>SpringHibernateLab</finalName>

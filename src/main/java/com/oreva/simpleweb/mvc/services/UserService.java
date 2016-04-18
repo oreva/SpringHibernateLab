@@ -1,11 +1,8 @@
 package com.oreva.simpleweb.mvc.services;
 
 import com.oreva.simpleweb.mvc.dao.UserDAO;
-import com.oreva.simpleweb.mvc.entities.IEntity;
-import com.oreva.simpleweb.mvc.entities.Message;
 import com.oreva.simpleweb.mvc.entities.User;
-import com.oreva.simpleweb.mvc.web.stubs.IStub;
-import com.oreva.simpleweb.mvc.web.stubs.UserStub;
+import com.oreva.simpleweb.mvc.web.dto.UserDTO;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -21,7 +18,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class UserService extends EntityService<User, UserStub> {
+public class UserService extends EntityService<User, UserDTO> {
     @Inject
     private UserDAO dao;
 
@@ -44,8 +41,8 @@ public class UserService extends EntityService<User, UserStub> {
     }
 
     @Override
-    public UserStub convertEntityToStub(User entity) {
-        UserStub stub = new UserStub();
+    public UserDTO convertEntityToStub(User entity) {
+        UserDTO stub = new UserDTO();
         stub.setId(entity.getId());
         stub.setFirstName(entity.getFirstName());
         stub.setLastName(entity.getLastName());
@@ -55,7 +52,7 @@ public class UserService extends EntityService<User, UserStub> {
     }
 
     @Override
-    public User convertStubToEntity(UserStub stub) {
+    public User convertStubToEntity(UserDTO stub) {
         User user = new User();
         user.setId(stub.getId());
         user.setFirstName(stub.getFirstName());

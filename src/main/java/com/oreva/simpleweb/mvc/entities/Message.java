@@ -1,9 +1,5 @@
 package com.oreva.simpleweb.mvc.entities;
 
-import com.oreva.simpleweb.mvc.web.stubs.IStub;
-import com.oreva.simpleweb.mvc.web.stubs.MessageStub;
-
-import javax.inject.Inject;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;

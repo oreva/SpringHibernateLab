@@ -1,13 +1,7 @@
 package com.oreva.simpleweb.mvc.entities;
 
-import com.oreva.simpleweb.mvc.web.stubs.IStub;
-import com.oreva.simpleweb.mvc.web.stubs.MessageStub;
-import com.oreva.simpleweb.mvc.web.stubs.UserStub;
-
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**

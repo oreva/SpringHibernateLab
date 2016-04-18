@@ -1,8 +1,4 @@
-package com.oreva.simpleweb.mvc.web.stubs;
-
-import com.oreva.simpleweb.mvc.entities.IEntity;
-import com.oreva.simpleweb.mvc.entities.Message;
-import com.oreva.simpleweb.mvc.entities.User;
+package com.oreva.simpleweb.mvc.web.dto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -15,7 +11,7 @@ import javax.validation.constraints.Size;
  * Time: 1:34 PM
  * To change this template use File | Settings | File Templates.
  */
-public class MessageStub extends Stub {
+public class MessageDTO extends DTO {
 
     private Long id;
 

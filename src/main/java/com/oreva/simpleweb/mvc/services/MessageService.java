@@ -1,13 +1,10 @@
 package com.oreva.simpleweb.mvc.services;
 
-import com.oreva.simpleweb.mvc.entities.IEntity;
 import com.oreva.simpleweb.mvc.entities.Message;
 import com.oreva.simpleweb.mvc.dao.MessageDAO;
 import com.oreva.simpleweb.mvc.entities.Tag;
 import com.oreva.simpleweb.mvc.entities.User;
-import com.oreva.simpleweb.mvc.web.stubs.IStub;
-import com.oreva.simpleweb.mvc.web.stubs.MessageStub;
-import org.springframework.core.convert.ConversionService;
+import com.oreva.simpleweb.mvc.web.dto.MessageDTO;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -23,7 +20,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class MessageService extends EntityService<Message, MessageStub> {
+public class MessageService extends EntityService<Message, MessageDTO> {
     @Inject
     private MessageDAO dao;
 
@@ -42,7 +39,7 @@ public class MessageService extends EntityService<Message, MessageStub> {
         return dao.loadAllMessages();
     }
 
-    public void newMessage(MessageStub messageStub, User user) {
+    public void newMessage(MessageDTO messageStub, User user) {
         // Save tags
         List<Tag> tags = tagService.saveTagsFromString(messageStub.getTagString());
         //Add tags to message and save message
@@ -55,8 +52,8 @@ public class MessageService extends EntityService<Message, MessageStub> {
     }
 
     @Override
-    public MessageStub convertEntityToStub(Message entity) {
-        MessageStub stub = new MessageStub();
+    public MessageDTO convertEntityToStub(Message entity) {
+        MessageDTO stub = new MessageDTO();
         stub.setId(entity.getId());
         stub.setText(entity.getText());
 
@@ -86,7 +83,7 @@ public class MessageService extends EntityService<Message, MessageStub> {
     }
 
     @Override
-    public Message convertStubToEntity(MessageStub stub) {
+    public Message convertStubToEntity(MessageDTO stub) {
         Message entity = new Message();
         entity.setId(stub.getId());
         entity.setText(stub.getText());

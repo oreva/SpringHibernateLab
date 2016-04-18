@@ -2,7 +2,7 @@ package com.oreva.simpleweb.mvc.controllers;
 
 import com.oreva.simpleweb.mvc.entities.User;
 import com.oreva.simpleweb.mvc.services.UserService;
-import com.oreva.simpleweb.mvc.web.stubs.UserStub;
+import com.oreva.simpleweb.mvc.web.dto.UserDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -34,14 +34,14 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     private String registerUser(Model model) {
-        model.addAttribute(new UserStub());
+        model.addAttribute("userStub", new UserDTO());
         return "users/edit";
     }
 
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     private String saveNewUser(Model model,
-                            @ModelAttribute("userStub") @Valid UserStub userStub,
+                            @ModelAttribute("userStub") @Valid UserDTO userStub,
                             Errors errors) {
         String currentPage = "users/edit";
         String nextPage = "redirect:/messages/result";
@@ -61,7 +61,7 @@ public class UserController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     private String saveUser(Model model,
-                            @ModelAttribute("userStub") @Valid UserStub userStub,
+                            @ModelAttribute("userStub") @Valid UserDTO userStub,
                             Errors errors) {
 
         String currentPage = "users/edit";
@@ -79,18 +79,17 @@ public class UserController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET, params = "user")
     private String editUser(Model model, HttpServletRequest request) {
-        //UserStub userStub = (UserStub) request.getAttribute("user");
         Long userId = Long.valueOf(request.getParameter("user"));
         User user = userService.getById(userId);
-        UserStub userStub = userService.convertEntityToStub(user);
-        model.addAttribute(userStub);
+        UserDTO userStub = userService.convertEntityToStub(user);
+        model.addAttribute("userStub", userStub);
         return "users/edit";
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     private String listAllUsers(Model model) {
         List<User> sources = userService.loadAllUsers();
-        List<UserStub> users = userService.convertListOfEntities(sources);
+        List<UserDTO> users = userService.convertListOfEntities(sources);
         model.addAttribute("users", users);
         return "users/list";
     }

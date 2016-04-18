@@ -1,7 +1,5 @@
 package com.oreva.simpleweb.mvc.entities;
 
-import com.oreva.simpleweb.mvc.web.stubs.IStub;
-
 /**
  * Created with IntelliJ IDEA.
  * User: Olga

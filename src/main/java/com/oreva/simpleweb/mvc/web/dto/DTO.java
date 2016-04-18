@@ -1,6 +1,4 @@
-package com.oreva.simpleweb.mvc.web.stubs;
-
-import com.oreva.simpleweb.mvc.entities.IEntity;
+package com.oreva.simpleweb.mvc.web.dto;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,6 +7,6 @@ import com.oreva.simpleweb.mvc.entities.IEntity;
  * Time: 12:04 PM
  * To change this template use File | Settings | File Templates.
  */
-public abstract class Stub implements IStub {
+public abstract class DTO implements IDTO {
 
 }

@@ -1,7 +1,7 @@
 package com.oreva.simpleweb.mvc.services;
 
 import com.oreva.simpleweb.mvc.entities.IEntity;
-import com.oreva.simpleweb.mvc.web.stubs.IStub;
+import com.oreva.simpleweb.mvc.web.dto.IDTO;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,7 +10,7 @@ import com.oreva.simpleweb.mvc.web.stubs.IStub;
  * Time: 12:39 PM
  * To change this template use File | Settings | File Templates.
  */
-public interface IEntityService<E extends IEntity, S extends IStub> {
+public interface IEntityService<E extends IEntity, S extends IDTO> {
 
     E getById(Long id);
 

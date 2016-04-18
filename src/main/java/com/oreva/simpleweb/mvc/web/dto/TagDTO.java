@@ -1,7 +1,4 @@
-package com.oreva.simpleweb.mvc.web.stubs;
-
-import com.oreva.simpleweb.mvc.entities.IEntity;
-import com.oreva.simpleweb.mvc.entities.Tag;
+package com.oreva.simpleweb.mvc.web.dto;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,11 +7,11 @@ import com.oreva.simpleweb.mvc.entities.Tag;
  * Time: 12:41 PM
  * To change this template use File | Settings | File Templates.
  */
-public class TagStub extends Stub {
+public class TagDTO extends DTO {
     private Long id;
     private String text;
 
-    public TagStub() {
+    public TagDTO() {
 
     }
 

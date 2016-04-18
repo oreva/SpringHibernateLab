@@ -2,7 +2,7 @@ package com.oreva.simpleweb.mvc.services;
 
 import com.oreva.simpleweb.mvc.dao.TagDAO;
 import com.oreva.simpleweb.mvc.entities.Tag;
-import com.oreva.simpleweb.mvc.web.stubs.TagStub;
+import com.oreva.simpleweb.mvc.web.dto.TagDTO;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -19,19 +19,19 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class TagService extends EntityService<Tag, TagStub> {
+public class TagService extends EntityService<Tag, TagDTO> {
     @Inject
     TagDAO dao;
 
     @Override
-    public TagStub convertEntityToStub(Tag entity) {
-        TagStub stub = new TagStub();
+    public TagDTO convertEntityToStub(Tag entity) {
+        TagDTO stub = new TagDTO();
         stub.setText(entity.getText());
         return stub;
     }
 
     @Override
-    public Tag convertStubToEntity(TagStub stub) {
+    public Tag convertStubToEntity(TagDTO stub) {
         Tag tag = new Tag();
         tag.setText(stub.getText());
         return tag;

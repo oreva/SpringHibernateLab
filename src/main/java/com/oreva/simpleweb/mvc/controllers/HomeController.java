@@ -1,17 +1,13 @@
 package com.oreva.simpleweb.mvc.controllers;
 
 import com.oreva.simpleweb.mvc.entities.User;
-import com.oreva.simpleweb.mvc.services.MessageService;
 import com.oreva.simpleweb.mvc.services.UserService;
-import com.oreva.simpleweb.mvc.web.stubs.UserStub;
-import org.hibernate.mapping.Map;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.oreva.simpleweb.mvc.web.dto.UserDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.inject.Inject;
@@ -35,13 +31,13 @@ public class HomeController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String showHomePage(Model model) {
-        model.addAttribute(new UserStub());
+        model.addAttribute("userStub", new UserDTO());
         return "home";
     }
 
     @RequestMapping(method = RequestMethod.POST, params = "login")
     public String login(Model model,
-                       @Valid UserStub userStub,
+                       @Valid UserDTO userStub,
                        Errors errors) {
         String currentPage = "home";
         String nextPage = "redirect:/messages/result";

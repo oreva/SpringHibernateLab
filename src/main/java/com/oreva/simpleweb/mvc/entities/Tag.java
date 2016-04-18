@@ -1,8 +1,5 @@
 package com.oreva.simpleweb.mvc.entities;
 
-import com.oreva.simpleweb.mvc.web.stubs.IStub;
-import com.oreva.simpleweb.mvc.web.stubs.TagStub;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
