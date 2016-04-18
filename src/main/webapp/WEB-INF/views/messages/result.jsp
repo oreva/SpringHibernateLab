@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: Olga
@@ -14,6 +15,7 @@
     <div>
         <h3>Please, select one of the following actions:</h3>
 
+        <h4>Messages</h4>
         <form action="new" method="GET">
             <!--<input type="hidden" name="new" value="">-->
             <input type="submit" value="Create New Message">
@@ -35,7 +37,10 @@
                 </tr>
             </table>
         </form>
+        <h4>Users</h4>
+        <form action="../users/list" method="GET">
+            <input type="submit" value="View All Users"/>
+        </form>
     </div>
-
 </body>
 </html>

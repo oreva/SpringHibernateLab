@@ -14,9 +14,15 @@
 <body>
     <div>
         <h3>Edit user information</h3>
-        <sf:form method="POST" modelAttribute="userStub">
+        <sf:form method="POST" commandName="userStub"><!--modelAttribute="userStub">-->
             <fieldset>
                 <table cellspacing="0">
+                    <tr>
+                        <th><label for="user_id">User ID</label></th>
+                        <td><sf:input path="id" size="50" id="user_id" disabled="true"/>
+                            <sf:errors path="id" cssClass="error"/>
+                        </td>
+                    </tr>
                     <tr>
                         <th><label for="user_name">First Name</label></th>
                         <td><sf:input path="firstName" size="50" id="user_name"

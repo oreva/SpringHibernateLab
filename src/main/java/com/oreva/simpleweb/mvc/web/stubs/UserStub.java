@@ -1,13 +1,9 @@
 package com.oreva.simpleweb.mvc.web.stubs;
 
-import com.oreva.simpleweb.mvc.entities.IEntity;
-import com.oreva.simpleweb.mvc.entities.Message;
-import com.oreva.simpleweb.mvc.entities.User;
-
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,6 +13,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class UserStub extends Stub {
+    @Digits(integer = 5, fraction = 0)
     private Long id;
 
     @NotNull

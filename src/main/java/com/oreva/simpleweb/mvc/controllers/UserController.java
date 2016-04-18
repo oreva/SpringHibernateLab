@@ -6,13 +6,16 @@ import com.oreva.simpleweb.mvc.web.stubs.UserStub;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -29,14 +32,37 @@ public class UserController {
     @Inject
     private UserService userService;
 
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    private String editUser(Model model) {
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    private String registerUser(Model model) {
         model.addAttribute(new UserStub());
         return "users/edit";
     }
 
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    private String saveNewUser(Model model,
+                            @ModelAttribute("userStub") @Valid UserStub userStub,
+                            Errors errors) {
+        String currentPage = "users/edit";
+        String nextPage = "redirect:/messages/result";
+
+        if (errors.hasErrors()) {
+            return currentPage;
+        }
+        //Save user information
+        User user = userService.convertStubToEntity(userStub);
+        userService.save(user);
+
+        //Save user in session when register
+        model.addAttribute("user", user);
+
+        return nextPage;
+    }
+
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    private String saveUser(Model model, @Valid UserStub userStub, Errors errors) {
+    private String saveUser(Model model,
+                            @ModelAttribute("userStub") @Valid UserStub userStub,
+                            Errors errors) {
 
         String currentPage = "users/edit";
         String nextPage = "redirect:/messages/result";
@@ -47,8 +73,25 @@ public class UserController {
         //Save user information
         User user = userService.convertStubToEntity(userStub);
         userService.save(user);
-        model.addAttribute("user", user);
 
         return nextPage;
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.GET, params = "user")
+    private String editUser(Model model, HttpServletRequest request) {
+        //UserStub userStub = (UserStub) request.getAttribute("user");
+        Long userId = Long.valueOf(request.getParameter("user"));
+        User user = userService.getById(userId);
+        UserStub userStub = userService.convertEntityToStub(user);
+        model.addAttribute(userStub);
+        return "users/edit";
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    private String listAllUsers(Model model) {
+        List<User> sources = userService.loadAllUsers();
+        List<UserStub> users = userService.convertListOfEntities(sources);
+        model.addAttribute("users", users);
+        return "users/list";
     }
 }

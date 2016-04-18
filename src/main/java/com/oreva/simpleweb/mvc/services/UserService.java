@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,6 +32,10 @@ public class UserService extends EntityService<User, UserStub> {
 
     public User getUserWithMessages(Long userId) {
         return dao.getUserWithMessages(userId);
+    }
+
+    public List<User> loadAllUsers() {
+        return dao.loadAllUsers();
     }
 
     @Override

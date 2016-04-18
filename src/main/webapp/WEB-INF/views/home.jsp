@@ -33,7 +33,7 @@
                 </table>
             </fieldset>
         </sf:form>
-        <form method="GET" action="users/edit">
+        <form method="GET" action="users/register">
             <fieldset>
                 <table cellspacing="0" border="0">
                     <tr>

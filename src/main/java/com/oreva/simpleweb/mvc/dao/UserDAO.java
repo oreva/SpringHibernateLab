@@ -10,6 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -68,5 +69,10 @@ public class UserDAO extends EntityDAO<User> {
             user = null;
         }
         return user;
+    }
+
+    public List<User> loadAllUsers() {
+        Query query = entityManager.createQuery("FROM User");
+        return query.getResultList();
     }
 }
