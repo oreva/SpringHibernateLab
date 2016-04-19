@@ -3,6 +3,9 @@ package com.oreva.simpleweb.mvc.controllers;
 import com.oreva.simpleweb.mvc.entities.User;
 import com.oreva.simpleweb.mvc.services.UserService;
 import com.oreva.simpleweb.mvc.web.dto.UserDTO;
+import org.dozer.DozerBeanMapper;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -31,6 +34,8 @@ import java.util.List;
 public class UserController {
     @Inject
     private UserService userService;
+    @Inject
+    private ConversionService conversionService;
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     private String registerUser(Model model) {
@@ -50,7 +55,7 @@ public class UserController {
             return currentPage;
         }
         //Save user information
-        User user = userService.convertStubToEntity(userStub);
+        User user = conversionService.convert(userStub, User.class);
         userService.save(user);
 
         //Save user in session when register
@@ -71,17 +76,20 @@ public class UserController {
             return currentPage;
         }
         //Save user information
-        User user = userService.convertStubToEntity(userStub);
+        User user = conversionService.convert(userStub, User.class);
         userService.save(user);
 
         return nextPage;
     }
 
+
+
     @RequestMapping(value = "/edit", method = RequestMethod.GET, params = "user")
     private String editUser(Model model, HttpServletRequest request) {
         Long userId = Long.valueOf(request.getParameter("user"));
         User user = userService.getById(userId);
-        UserDTO userStub = userService.convertEntityToStub(user);
+        UserDTO userStub = conversionService.convert(user, UserDTO.class);
+
         model.addAttribute("userStub", userStub);
         return "users/edit";
     }
@@ -89,7 +97,9 @@ public class UserController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     private String listAllUsers(Model model) {
         List<User> sources = userService.loadAllUsers();
-        List<UserDTO> users = userService.convertListOfEntities(sources);
+        List<UserDTO> users = (List<UserDTO>) conversionService.convert(sources,
+                TypeDescriptor.forObject(sources),
+                TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(UserDTO.class)));
         model.addAttribute("users", users);
         return "users/list";
     }

@@ -1,8 +1,5 @@
 package com.oreva.simpleweb.mvc.services;
 
-import com.oreva.simpleweb.mvc.entities.IEntity;
-import com.oreva.simpleweb.mvc.web.dto.IDTO;
-
 /**
  * Created with IntelliJ IDEA.
  * User: Olga
@@ -10,12 +7,11 @@ import com.oreva.simpleweb.mvc.web.dto.IDTO;
  * Time: 12:39 PM
  * To change this template use File | Settings | File Templates.
  */
-public interface IEntityService<E extends IEntity, S extends IDTO> {
+public interface IEntityService<E> {
 
     E getById(Long id);
 
     void save(E entity);
-    void saveFromStub(S entity);
 
 
 }

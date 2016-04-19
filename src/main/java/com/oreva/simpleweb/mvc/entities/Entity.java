@@ -7,6 +7,6 @@ package com.oreva.simpleweb.mvc.entities;
  * Time: 12:40 PM
  * To change this template use File | Settings | File Templates.
  */
-public abstract class Entity implements IEntity {
+public abstract class Entity {
 
 }

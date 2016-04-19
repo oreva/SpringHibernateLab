@@ -7,6 +7,6 @@ package com.oreva.simpleweb.mvc.web.dto;
  * Time: 12:04 PM
  * To change this template use File | Settings | File Templates.
  */
-public abstract class DTO implements IDTO {
+public abstract class DTO {
 
 }

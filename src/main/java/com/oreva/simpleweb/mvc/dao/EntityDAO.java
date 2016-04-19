@@ -1,6 +1,6 @@
 package com.oreva.simpleweb.mvc.dao;
 
-import com.oreva.simpleweb.mvc.entities.IEntity;
+import com.oreva.simpleweb.mvc.entities.Entity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -14,7 +14,7 @@ import javax.persistence.PersistenceContext;
  * To change this template use File | Settings | File Templates.
  */
 @Repository
-public abstract class EntityDAO<E extends IEntity> implements IEntityDAO<E> {
+public abstract class EntityDAO<E extends Entity> implements IEntityDAO<E> {
     @PersistenceContext
     protected EntityManager entityManager;
 

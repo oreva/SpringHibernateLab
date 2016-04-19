@@ -19,23 +19,9 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class TagService extends EntityService<Tag, TagDTO> {
+public class TagService extends EntityService<Tag> {
     @Inject
     TagDAO dao;
-
-    @Override
-    public TagDTO convertEntityToStub(Tag entity) {
-        TagDTO stub = new TagDTO();
-        stub.setText(entity.getText());
-        return stub;
-    }
-
-    @Override
-    public Tag convertStubToEntity(TagDTO stub) {
-        Tag tag = new Tag();
-        tag.setText(stub.getText());
-        return tag;
-    }
 
     /**
      *

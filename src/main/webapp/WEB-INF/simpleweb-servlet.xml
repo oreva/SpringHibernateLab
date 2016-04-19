@@ -56,6 +56,24 @@
         <property name="entityManagerFactory" ref="myEmf"/>
     </bean>
 
+    <!-- Type Conversion Service -->
+    <bean id="conversionService"
+          class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.oreva.simpleweb.mvc.converters.UserToDTOConverter"/>
+                <bean class="com.oreva.simpleweb.mvc.converters.UserFromDTOConverter"/>
+                <bean class="com.oreva.simpleweb.mvc.converters.MessageToDTOConverter"/>
+                <bean class="com.oreva.simpleweb.mvc.converters.MessageFromDTOConverter"/>
+                <bean class="com.oreva.simpleweb.mvc.converters.TagToDTOConverter"/>
+                <bean class="com.oreva.simpleweb.mvc.converters.TagFromDTOConverter"/>
+            </set>
+        </property>
+    </bean>
+
+    <!-- Dozer bean mapper
+    <bean id="org.dozer.Mapper" class="org.dozer.DozerBeanMapper"/>-->
+
     <!-- this is the service object that we want to make transactional -->
     <!--<bean id="fooService" class="com.oreva.simpleweb.mvc.services.GenericEntityService"/>-->
 

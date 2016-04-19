@@ -6,6 +6,8 @@ import com.oreva.simpleweb.mvc.services.MessageService;
 import com.oreva.simpleweb.mvc.services.TagService;
 import com.oreva.simpleweb.mvc.services.UserService;
 import com.oreva.simpleweb.mvc.web.dto.MessageDTO;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -38,7 +40,7 @@ public class MessageController {
     @Inject
     private UserService userService;
     @Inject
-    private TagService tagService;
+    private ConversionService conversionService;
 
     //@RequestMapping(method = RequestMethod.GET, params = "new")
     @RequestMapping(value = "/new", method = RequestMethod.GET)
@@ -65,7 +67,11 @@ public class MessageController {
 
         // Show all messages
         List<Message> sources = messageService.loadAllMessages();
-        List<MessageDTO> messages = messageService.convertListOfEntities(sources);
+        List<MessageDTO> messages = (List<MessageDTO>) conversionService.convert(
+                sources,
+                TypeDescriptor.forObject(sources),
+                TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(MessageDTO.class))
+        );
         model.addAttribute("messages", messages);
         return "messages/list";
     }
@@ -73,7 +79,11 @@ public class MessageController {
     public String showUserMessages(Long userId, Model model) {
         User user = userService.getUserWithMessages(userId);
         List<Message> sources = (null != user) ? user.getMessages() : new ArrayList<Message>();
-        List<MessageDTO> messages = messageService.convertListOfEntities(sources);
+        List<MessageDTO> messages = (List<MessageDTO>) conversionService.convert(
+                sources,
+                TypeDescriptor.forObject(sources),
+                TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(MessageDTO.class))
+        );
         model.addAttribute("messages", messages);
         return "messages/list";
     }

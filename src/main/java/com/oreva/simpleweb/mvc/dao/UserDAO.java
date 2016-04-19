@@ -1,15 +1,10 @@
 package com.oreva.simpleweb.mvc.dao;
 
-import com.oreva.simpleweb.mvc.entities.IEntity;
 import com.oreva.simpleweb.mvc.entities.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Root;
 import java.util.List;
 
 /**

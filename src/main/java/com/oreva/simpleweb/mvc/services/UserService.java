@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class UserService extends EntityService<User, UserDTO> {
+public class UserService extends EntityService<User> {
     @Inject
     private UserDAO dao;
 
@@ -38,27 +38,5 @@ public class UserService extends EntityService<User, UserDTO> {
     @Override
     public void save(User entity) {
         dao.save(entity);
-    }
-
-    @Override
-    public UserDTO convertEntityToStub(User entity) {
-        UserDTO stub = new UserDTO();
-        stub.setId(entity.getId());
-        stub.setFirstName(entity.getFirstName());
-        stub.setLastName(entity.getLastName());
-        stub.setMail(entity.getMail());
-        stub.setPhone(entity.getPhone());
-        return stub;
-    }
-
-    @Override
-    public User convertStubToEntity(UserDTO stub) {
-        User user = new User();
-        user.setId(stub.getId());
-        user.setFirstName(stub.getFirstName());
-        user.setLastName(stub.getLastName());
-        user.setMail(stub.getMail());
-        user.setPhone(stub.getPhone());
-        return user;
     }
 }

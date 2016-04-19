@@ -1,5 +1,7 @@
 package com.oreva.simpleweb.mvc.web.dto;
 
+import org.dozer.Mapping;
+
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -14,17 +16,23 @@ import javax.validation.constraints.Size;
  */
 public class UserDTO extends DTO {
     @Digits(integer = 5, fraction = 0)
+    // Dozer mapping
+    @Mapping("id")
     private Long id;
 
     @NotNull
     @Size(min = 1, max = 100,
             message = "First name must be between 1 and 100 character long.")
     @Pattern(regexp = "([a-zA-Z])+", message = "First name must contain only letters.")
+    // Dozer mapping
+    @Mapping("firstName")
     private String firstName;
 
     @Size(min = 1, max = 100,
             message = "Last name must be between 1 and 100 character long.")
     @Pattern(regexp = "([a-zA-Z])+", message = "Last name must contain only letters.")
+    // Dozer mapping
+    @Mapping("lastName")
     private String lastName;
 
     @NotNull
@@ -32,6 +40,8 @@ public class UserDTO extends DTO {
             message = "User phone must be between 2 and 10 characters long.")
     @Pattern(regexp = "[0-9]+",
             message = "User phone must contain only digit characters.")
+    // Dozer mapping
+    @Mapping("phone")
     private String phone;
 
     @NotNull
@@ -39,6 +49,8 @@ public class UserDTO extends DTO {
             message = "User email must be between 5 and 50 character long.")
     @Pattern(regexp = "(\\w)+@[a-zA-Z0-9]+(\\.[a-zA-Z]+)+",
             message = "Invalid email format.")
+    // Dozer mapping
+    @Mapping("mail")
     private String mail;
 
     public Long getId() {
