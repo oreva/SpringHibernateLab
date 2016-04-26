@@ -1,6 +1,5 @@
 package com.oreva.simpleweb.mvc.services;
 
-import com.oreva.simpleweb.mvc.dao.TagDAO;
 import com.oreva.simpleweb.mvc.entities.Tag;
 import com.oreva.simpleweb.mvc.web.dto.TagDTO;
 import org.springframework.stereotype.Service;
@@ -19,15 +18,11 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class TagService extends EntityService<Tag> {
-    @Inject
+public class delete_TagService extends EntityService<Tag> {
+    /*@Inject
     TagDAO dao;
 
-    /**
-     *
-     * @param tagString comma separated string with tags
-     * @return
-     */
+
     public List<Tag> saveTagsFromString(String tagString) {
         String[] tagStrings = tagString.split("\\,");
         List<Tag> result = new ArrayList<Tag>();
@@ -41,5 +36,5 @@ public class TagService extends EntityService<Tag> {
             result.add(tag);
         }
         return result;
-    }
+    }*/
 }

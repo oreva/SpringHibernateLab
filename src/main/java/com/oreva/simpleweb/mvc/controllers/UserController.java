@@ -3,7 +3,6 @@ package com.oreva.simpleweb.mvc.controllers;
 import com.oreva.simpleweb.mvc.entities.User;
 import com.oreva.simpleweb.mvc.services.UserService;
 import com.oreva.simpleweb.mvc.web.dto.UserDTO;
-import org.dozer.DozerBeanMapper;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.stereotype.Controller;

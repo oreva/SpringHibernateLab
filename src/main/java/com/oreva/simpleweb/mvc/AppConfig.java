@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ConversionServiceFactoryBean;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -40,6 +41,9 @@ import java.util.Set;
 @ComponentScan("com.oreva.simpleweb.mvc")
 @EnableWebMvc //tha same as <mvc:annotation-driven/>
 @EnableTransactionManagement(proxyTargetClass = true) //the same as <tx:annotation-driven/>
+@EnableJpaRepositories(basePackages = {"com.oreva.simpleweb.mvc.repositories_spring_data_jpa"},
+        entityManagerFactoryRef = "myEmf",
+        transactionManagerRef = "txManager")
 public class AppConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

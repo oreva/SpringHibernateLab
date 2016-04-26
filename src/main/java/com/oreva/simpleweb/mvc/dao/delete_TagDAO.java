@@ -14,7 +14,7 @@ import javax.persistence.Query;
  * To change this template use File | Settings | File Templates.
  */
 @Repository
-public class TagDAO extends EntityDAO<Tag> {
+public class delete_TagDAO extends EntityDAO<Tag> {
 
     public Tag getByName(String tagName) {
         Query query = entityManager.createQuery("FROM Tag where text = :nameParam")

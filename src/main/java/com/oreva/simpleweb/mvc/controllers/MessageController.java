@@ -3,7 +3,6 @@ package com.oreva.simpleweb.mvc.controllers;
 import com.oreva.simpleweb.mvc.entities.Message;
 import com.oreva.simpleweb.mvc.entities.User;
 import com.oreva.simpleweb.mvc.services.MessageService;
-import com.oreva.simpleweb.mvc.services.TagService;
 import com.oreva.simpleweb.mvc.services.UserService;
 import com.oreva.simpleweb.mvc.web.dto.MessageDTO;
 import org.springframework.core.convert.ConversionService;
