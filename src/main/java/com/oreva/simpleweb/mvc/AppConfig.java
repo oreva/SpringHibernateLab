@@ -2,6 +2,7 @@ package com.oreva.simpleweb.mvc;
 
 import com.oreva.simpleweb.mvc.converters.*;
 import org.hibernate.dialect.PostgreSQL9Dialect;
+import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -77,6 +79,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         bean.setDataSource(dataSource());
         bean.setJpaVendorAdapter(jpaVendorAdapter());
         bean.setPersistenceUnitName("simpleweb");
+        bean.setPackagesToScan("com.oreva.simpleweb.mvc.entities");
+        bean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         bean.setJpaDialect(new HibernateJpaDialect());
         bean.setJpaPropertyMap(hibernateJpaProperties());
         return bean;
