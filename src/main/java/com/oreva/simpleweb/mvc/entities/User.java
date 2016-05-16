@@ -1,7 +1,11 @@
 package com.oreva.simpleweb.mvc.entities;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -13,7 +17,7 @@ import java.util.List;
  */
 @javax.persistence.Entity
 @Table(name = "USERS")
-public class User extends Entity {
+public class User extends Entity implements UserDetails {
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -31,9 +35,34 @@ public class User extends Entity {
     @Column(name = "mail")
     private String mail;
 
+    @Column(name = "password")
+    private String password;
+
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL,
         fetch = FetchType.LAZY)
     private List<Message> messages = new ArrayList<Message>();
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Role> roles = new ArrayList<Role>();
+
+    /*
+    TODO: remove this constructor. Added here only for test user roles
+     */
+    /*@Inject
+    private RoleRepository roleRepository;
+
+    public User() {
+        Role adminRole;
+        if (0 == roles.size()) {
+            adminRole = roleRepository.findByName("ROLE_ADMIN");
+            if (null == adminRole) {
+                adminRole = new Role();
+                adminRole.setName("ROLE_ADMIN");
+                roleRepository.save(adminRole);
+            }
+            getRoles().add(adminRole);
+        }
+    }*/
 
     public Long getId() {
         return id;
@@ -78,6 +107,54 @@ public class User extends Entity {
     public List<Message> getMessages() {
         return messages;
     }
+
+    public List<Role> getRoles() { return roles; }
+
+    /**
+     * UserDetails implementation
+     * @return
+     */
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.getMail();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+    /**
+     * end of UserDetails implementation
+     */
 
     /*public void addMessage(Message m) {
         messages.add(m);

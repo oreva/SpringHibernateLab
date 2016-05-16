@@ -86,7 +86,7 @@ public class UserController {
     @RequestMapping(value = "/edit", method = RequestMethod.GET, params = "user")
     private String editUser(Model model, HttpServletRequest request) {
         Long userId = Long.valueOf(request.getParameter("user"));
-        User user = userService.getById(userId);
+        User user = userService.findById(userId); //userService.getById(userId);
         UserDTO userStub = conversionService.convert(user, UserDTO.class);
 
         model.addAttribute("userStub", userStub);
@@ -95,7 +95,7 @@ public class UserController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     private String listAllUsers(Model model) {
-        List<User> sources = userService.loadAllUsers();
+        List<User> sources = userService.findAllUsers(); //userService.loadAllUsers();
         List<UserDTO> users = (List<UserDTO>) conversionService.convert(sources,
                 TypeDescriptor.forObject(sources),
                 TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(UserDTO.class)));

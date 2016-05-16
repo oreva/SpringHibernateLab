@@ -44,7 +44,7 @@ public class HomeController {
 
         Long enteredID = userStub.getId();
         if (null != enteredID && 0 < enteredID && 100 > enteredID) {
-            User user = userService.getById(enteredID);
+            User user = userService.findById(enteredID); //userService.getById(enteredID);
             if (null != user) {
                 model.addAttribute("user", user);
                 return nextPage;

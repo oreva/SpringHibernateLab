@@ -16,7 +16,7 @@ import javax.transaction.Transactional;
 @Transactional
 public abstract class EntityService<E extends Entity> implements IEntityService<E> {
     @Override
-    public E getById(Long id) {
+    public E findById(Long id) {
         throw new UnsupportedOperationException();
     }
 

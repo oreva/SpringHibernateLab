@@ -1,6 +1,5 @@
 package com.oreva.simpleweb.mvc.controllers;
 
-import com.oreva.simpleweb.mvc.dao.MessageDAO;
 import com.oreva.simpleweb.mvc.services.MessageService;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;

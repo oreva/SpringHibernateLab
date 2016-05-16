@@ -1,7 +1,7 @@
 package com.oreva.simpleweb.mvc.services;
 
-import com.oreva.simpleweb.mvc.dao.UserDAO;
 import com.oreva.simpleweb.mvc.entities.User;
+import com.oreva.simpleweb.mvc.repositories.UserRepository;
 import com.oreva.simpleweb.mvc.web.dto.UserDTO;
 import org.springframework.stereotype.Service;
 
@@ -20,23 +20,27 @@ import java.util.List;
 @Transactional
 public class UserService extends EntityService<User> {
     @Inject
-    private UserDAO dao;
+    private UserRepository repository;
 
     @Override
-    public User getById(Long id) {
-        return dao.getById(id);
+    public User findById(Long id) {
+        return repository.findById(id);
     }
 
-    public User getUserWithMessages(Long userId) {
+    public User findByMail(String email) {
+        return repository.findByMail(email);
+    }
+
+    /*public User getUserWithMessages(Long userId) {
         return dao.getUserWithMessages(userId);
-    }
+    }*/
 
-    public List<User> loadAllUsers() {
-        return dao.loadAllUsers();
+    public List<User> findAllUsers() {
+        return repository.findAll();
     }
 
     @Override
     public void save(User entity) {
-        dao.save(entity);
+        repository.save(entity);
     }
 }

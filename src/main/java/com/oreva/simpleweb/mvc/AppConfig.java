@@ -1,12 +1,12 @@
 package com.oreva.simpleweb.mvc;
 
 import com.oreva.simpleweb.mvc.converters.*;
-import org.hibernate.dialect.PostgreSQL9Dialect;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ConversionServiceFactoryBean;
+import org.springframework.core.Ordered;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -15,15 +15,11 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -41,10 +37,17 @@ import java.util.Set;
 @ComponentScan("com.oreva.simpleweb.mvc")
 @EnableWebMvc //tha same as <mvc:annotation-driven/>
 @EnableTransactionManagement(proxyTargetClass = true) //the same as <tx:annotation-driven/>
-@EnableJpaRepositories(basePackages = {"com.oreva.simpleweb.mvc.repositories_spring_data_jpa"},
+@EnableJpaRepositories(basePackages = {"com.oreva.simpleweb.mvc.repositories"},
         entityManagerFactoryRef = "myEmf",
         transactionManagerRef = "txManager")
 public class AppConfig extends WebMvcConfigurerAdapter {
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        super.addViewControllers(registry);
+        registry.addViewController("/login").setViewName("login");
+        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+    }
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
@@ -107,6 +110,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
     private Map<String, ?> hibernateJpaProperties() {
         HashMap<String, String> properties = new HashMap<>();
+        //properties.put("hibernate.hbm2ddl.auto", "create-drop");
         properties.put("hibernate.hbm2ddl.auto", "update");
         properties.put("hibernate.show_sql", "true");
         properties.put("hibernate.format_sql", "true");

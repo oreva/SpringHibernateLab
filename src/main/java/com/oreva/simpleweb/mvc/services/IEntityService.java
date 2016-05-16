@@ -9,7 +9,7 @@ package com.oreva.simpleweb.mvc.services;
  */
 public interface IEntityService<E> {
 
-    E getById(Long id);
+    E findById(Long id);
 
     void save(E entity);
 

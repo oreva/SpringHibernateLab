@@ -1,10 +1,7 @@
-package com.oreva.simpleweb.mvc.repositories_spring_data_jpa;
+package com.oreva.simpleweb.mvc.repositories;
 
 import com.oreva.simpleweb.mvc.entities.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
-
-import java.util.List;
 
 /**
  * Created by Olga on 4/26/2016.

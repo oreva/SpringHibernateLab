@@ -1,6 +1,7 @@
 package com.oreva.simpleweb.mvc.services;
 
 import com.oreva.simpleweb.mvc.entities.Tag;
+import com.oreva.simpleweb.mvc.repositories.TagRepository;
 import com.oreva.simpleweb.mvc.web.dto.TagDTO;
 import org.springframework.stereotype.Service;
 
@@ -18,23 +19,23 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class delete_TagService extends EntityService<Tag> {
-    /*@Inject
-    TagDAO dao;
+public class TagService extends EntityService<Tag> {
+    @Inject
+    private TagRepository repository;
 
 
     public List<Tag> saveTagsFromString(String tagString) {
         String[] tagStrings = tagString.split("\\,");
         List<Tag> result = new ArrayList<Tag>();
         for (String ts: tagStrings) {
-            Tag tag = dao.getByName(ts.trim());
+            Tag tag = repository.findByText(ts.trim());
             if (null == tag) {
                 //save new tag
                 tag = new Tag(ts);
-                dao.save(tag);
+                repository.save(tag);
             }
             result.add(tag);
         }
         return result;
-    }*/
+    }
 }

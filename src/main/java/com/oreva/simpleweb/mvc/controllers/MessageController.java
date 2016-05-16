@@ -76,7 +76,7 @@ public class MessageController {
     }
 
     public String showUserMessages(Long userId, Model model) {
-        User user = userService.getUserWithMessages(userId);
+        User user = userService.findById(userId); //userService.getUserWithMessages(userId);
         List<Message> sources = (null != user) ? user.getMessages() : new ArrayList<Message>();
         List<MessageDTO> messages = (List<MessageDTO>) conversionService.convert(
                 sources,
