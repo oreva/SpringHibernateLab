@@ -24,10 +24,9 @@ import javax.validation.Valid;
 @Controller
 @Transactional
 @RequestMapping({"/","/home"})
-@SessionAttributes({"user"})
 public class HomeController {
     @Inject
-    private UserService userService;
+    public UserService userService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String showHomePage(Model model) {
@@ -46,7 +45,7 @@ public class HomeController {
         if (null != enteredID && 0 < enteredID && 100 > enteredID) {
             User user = userService.findById(enteredID); //userService.getById(enteredID);
             if (null != user) {
-                model.addAttribute("user", user);
+                //model.addAttribute("user", user);
                 return nextPage;
             } else {
                 model.addAttribute("errorStr", "There is no registered user with entered id");

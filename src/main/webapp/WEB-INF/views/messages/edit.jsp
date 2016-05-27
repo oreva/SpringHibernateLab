@@ -20,6 +20,7 @@
         <h3>Create new message</h3>
 
         <sf:form method="POST" modelAttribute="messageStub">
+            <sf:hidden path="id"/>
             <fieldset>
                 <table cellspacing="0">
                     <tr>

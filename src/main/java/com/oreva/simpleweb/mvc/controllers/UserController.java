@@ -5,6 +5,8 @@ import com.oreva.simpleweb.mvc.services.UserService;
 import com.oreva.simpleweb.mvc.web.dto.UserDTO;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -28,23 +30,22 @@ import java.util.List;
  */
 @Controller
 @Transactional
-@SessionAttributes({"user"})
 @RequestMapping("/users")
 public class UserController {
     @Inject
-    private UserService userService;
+    public UserService userService;
     @Inject
-    private ConversionService conversionService;
+    public ConversionService conversionService;
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    private String registerUser(Model model) {
+    public String registerUser(Model model) {
         model.addAttribute("userStub", new UserDTO());
         return "users/edit";
     }
 
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    private String saveNewUser(Model model,
+    public String saveNewUser(Model model,
                             @ModelAttribute("userStub") @Valid UserDTO userStub,
                             Errors errors) {
         String currentPage = "users/edit";
@@ -58,13 +59,13 @@ public class UserController {
         userService.save(user);
 
         //Save user in session when register
-        model.addAttribute("user", user);
+        //model.addAttribute("user", user);
 
         return nextPage;
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    private String saveUser(Model model,
+    public String saveUser(Model model,
                             @ModelAttribute("userStub") @Valid UserDTO userStub,
                             Errors errors) {
 
@@ -84,7 +85,7 @@ public class UserController {
 
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET, params = "user")
-    private String editUser(Model model, HttpServletRequest request) {
+    public String editUser(Model model, HttpServletRequest request) {
         Long userId = Long.valueOf(request.getParameter("user"));
         User user = userService.findById(userId); //userService.getById(userId);
         UserDTO userStub = conversionService.convert(user, UserDTO.class);
@@ -94,7 +95,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    private String listAllUsers(Model model) {
+    public String listAllUsers(Model model) {
         List<User> sources = userService.findAllUsers(); //userService.loadAllUsers();
         List<UserDTO> users = (List<UserDTO>) conversionService.convert(sources,
                 TypeDescriptor.forObject(sources),

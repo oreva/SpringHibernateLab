@@ -1,6 +1,7 @@
 package com.oreva.simpleweb.mvc;
 
 import com.oreva.simpleweb.mvc.converters.*;
+import com.oreva.simpleweb.mvc.services.UserService;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -133,17 +134,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     // ConversionService config
     @Bean
     public ConversionServiceFactoryBean conversionService() {
-        ConversionServiceFactoryBean bean = new ConversionServiceFactoryBean();
-
-        Set<Converter> converters = new HashSet<>();
-        converters.add(new UserToDTOConverter());
-        converters.add(new UserFromDTOConverter());
-        converters.add(new MessageToDTOConverter());
-        converters.add(new MessageFromDTOConverter());
-        converters.add(new TagToDTOConverter());
-        converters.add(new TagFromDTOConverter());
-
-        bean.setConverters(converters);
+        ConversionServiceFactoryBean bean = new CustomConversionServiceFactoryBean();
         return bean;
     }
 }

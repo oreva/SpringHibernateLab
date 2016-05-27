@@ -3,6 +3,7 @@ package com.oreva.simpleweb.mvc.converters;
 import com.oreva.simpleweb.mvc.entities.Tag;
 import com.oreva.simpleweb.mvc.web.dto.TagDTO;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,6 +12,7 @@ import org.springframework.core.convert.converter.Converter;
  * Time: 12:41 PM
  * To change this template use File | Settings | File Templates.
  */
+@Component
 public class TagToDTOConverter implements Converter<Tag, TagDTO> {
     @Override
     public TagDTO convert(Tag entity) {

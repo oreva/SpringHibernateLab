@@ -7,6 +7,8 @@ import com.oreva.simpleweb.mvc.services.UserService;
 import com.oreva.simpleweb.mvc.web.dto.MessageDTO;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -32,14 +34,13 @@ import java.util.List;
 @Controller
 @Transactional
 @RequestMapping("/messages")
-@SessionAttributes({"user"})
 public class MessageController {
     @Inject
-    private MessageService messageService;
+    public MessageService messageService;
     @Inject
-    private UserService userService;
+    public UserService userService;
     @Inject
-    private ConversionService conversionService;
+    public ConversionService conversionService;
 
     //@RequestMapping(method = RequestMethod.GET, params = "new")
     @RequestMapping(value = "/new", method = RequestMethod.GET)
@@ -50,8 +51,8 @@ public class MessageController {
     }
 
     @RequestMapping(value = "list", method = RequestMethod.GET, params = "listCurrent")
-    public String showCurrentUserMessages(Model model, @ModelAttribute User user) {
-        return showUserMessages(user.getId(), model);
+    public String showCurrentUserMessages(Model model) {//, @ModelAttribute User user) {
+        return showUserMessages(userService.getCurrentUser().getId(), model);
     }
 
     @RequestMapping(value = "list", method = RequestMethod.GET, params = "list")
@@ -76,7 +77,7 @@ public class MessageController {
     }
 
     public String showUserMessages(Long userId, Model model) {
-        User user = userService.findById(userId); //userService.getUserWithMessages(userId);
+        User user = userService.findById(userId, true); //userService.getUserWithMessages(userId);
         List<Message> sources = (null != user) ? user.getMessages() : new ArrayList<Message>();
         List<MessageDTO> messages = (List<MessageDTO>) conversionService.convert(
                 sources,
@@ -88,13 +89,16 @@ public class MessageController {
     }
 
     @RequestMapping(value = "/new", method=RequestMethod.POST)
-    public String addMessageFromForm(@ModelAttribute User user,
+    public String addMessageFromForm(//@ModelAttribute User user,
                                      @Valid MessageDTO messageStub,
                                      Errors errors) {
         if(errors.hasErrors()) {
             return "messages/edit";
         }
-        messageService.newMessage(messageStub, user);
+        User currentUser = userService.getCurrentUser();
+        User user = userService.findById(currentUser.getId(), true);
+        //Create new message when collection of messages will be created
+        messageService.newMessage(messageStub, user, conversionService);
 
         return "redirect:/messages/result";
     }
@@ -103,4 +107,6 @@ public class MessageController {
     public String showResultPage() {
         return "messages/result";
     }
+
+
 }

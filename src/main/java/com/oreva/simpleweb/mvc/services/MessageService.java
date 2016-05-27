@@ -27,7 +27,12 @@ public class MessageService extends EntityService<Message> {
     @Inject
     private TagService tagService;
     @Inject
-    private ConversionService conversionService;
+    private UserService userService;
+
+    @Override
+    public Message findById(Long id) {
+        return repository.findById(id);
+    }
 
     @Override
     public void save(Message entity) {
@@ -38,15 +43,18 @@ public class MessageService extends EntityService<Message> {
         return repository.findAll();
     }
 
-    public void newMessage(MessageDTO messageStub, User user) {
+    public void newMessage(MessageDTO messageStub, User user,
+                           ConversionService conversionService) {
         // Save tags
         List<Tag> tags = tagService.saveTagsFromString(messageStub.getTagString());
         //Add tags to message and save message
         Message message = conversionService.convert(messageStub, Message.class);
         message.addTags(tags);
-        //Set user
+
+        user.getMessages().add(message);
         message.setUser(user);
 
-        repository.save(message);
+        userService.save(user);
+        int i= 0;
     }
 }

@@ -17,6 +17,9 @@ import java.util.List;
  */
 @javax.persistence.Entity
 @Table(name = "USERS")
+/* @NamedEntityGraph doesn't work for now. We use @Query for the method of UserRepository instead of @EntityGraph
+@NamedEntityGraph(name = "userWithMessagesEntityGraph",
+    attributeNodes = {@NamedAttributeNode("messages")})*/
 public class User extends Entity implements UserDetails {
     @Id
     @GeneratedValue
@@ -42,7 +45,7 @@ public class User extends Entity implements UserDetails {
         fetch = FetchType.LAZY)
     private List<Message> messages = new ArrayList<Message>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private List<Role> roles = new ArrayList<Role>();
 
     /*
