@@ -55,6 +55,5 @@ public class MessageService extends EntityService<Message> {
         message.setUser(user);
 
         userService.save(user);
-        int i= 0;
     }
 }
