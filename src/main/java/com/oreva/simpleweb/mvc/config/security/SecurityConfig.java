@@ -44,13 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //http.userDetailsService(userDetailsService);
 
         http.authorizeRequests()
-                .antMatchers("/resources/**").permitAll()
-                //.antMatchers("*/register/**").permitAll()
+                .antMatchers("/users/register/**").permitAll()
                 .anyRequest().authenticated()
-                .and()
-            .authorizeRequests()
-                .antMatchers("*/register/**").permitAll()
-                //.anyRequest().anonymous()
                 .and()
             .formLogin()
                 .loginPage("/login")
