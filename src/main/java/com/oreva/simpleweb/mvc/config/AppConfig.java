@@ -1,4 +1,4 @@
-package com.oreva.simpleweb.mvc;
+package com.oreva.simpleweb.mvc.config;
 
 import com.oreva.simpleweb.mvc.converters.*;
 import com.oreva.simpleweb.mvc.services.UserService;

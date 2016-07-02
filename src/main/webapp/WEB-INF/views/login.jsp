@@ -15,25 +15,55 @@
     <div>
         <form action="login" method="POST">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
             <!-- Login Error section -->
             <c:if test="${param.error != null}">
-                <c:out value="Invalid username and password."/>
-                <br>
+                <p style="color:red">
+                    <c:out value="Invalid username and password."/>
+                    <br>
+                </p>
             </c:if>
+
             <!-- Logged Out section -->
             <c:if test="${param.logout != null}">
-                <c:out value="You have been logged out."/>
-                <br>
+                <p style="font-weight:bold">
+                    <c:out value="You have been logged out."/>
+                    <br>
+                </p>
             </c:if>
+            <p/>
             <p>
-                <label for="username">Username</label>
+                <table cellspacing="2" cellpadding="2">
+                    <thead>Enter your email address and password to login:</thead>
+                    <br/>
+                    <tr>
+                        <th align="left"><label for="username">Username (email)</label></th>
+                        <td><input type="text" id="username" name="username"/></td>
+                    </tr>
+                    <tr>
+                        <th align="left"><label for="password">Password</label></th>
+                        <td><input type="password" id="password" name="password"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right"><input type="submit" value="Log in"></td>
+                    </tr>
+                </table>
+            </p>
+
+            <!--<b>Enter your email address and password to login:</b>
+            <p>
+                <label for="username">Username (email)</label>
                 <input type="text" id="username" name="username"/>
             </p>
             <p>
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password"/>
             </p>
-            <input type="submit" value="Log in">
+            <input type="submit" value="Log in">-->
+        </form>
+        <form action="users/register" method="get">
+            <b>Or register new account:</b>
+            <input type="submit" value="Register">
         </form>
     </div>
 </body>

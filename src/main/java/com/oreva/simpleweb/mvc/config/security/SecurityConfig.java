@@ -1,13 +1,15 @@
-package com.oreva.simpleweb.mvc.security.config;
+package com.oreva.simpleweb.mvc.config.security;
 
-import com.oreva.simpleweb.mvc.security.CustomUserDetailsService;
+import com.oreva.simpleweb.mvc.entities.Role;
+import com.oreva.simpleweb.mvc.services.RoleService;
+import com.oreva.simpleweb.mvc.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configurers.provisioning.JdbcUserDetailsManagerConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
+
+import java.util.List;
 
 /**
  * Created by Olga on 4/26/2016.
@@ -17,18 +19,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private CustomUserDetailsService userDetailsService;
+    @Autowired
+    public RoleService roleService;
+    @Autowired
+    public UserService userService;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        // Setup all roles first
+        roleService.initRoles();
+        // Init admin user
+        userService.initAdminUser(userDetailsService);
+
+        // Set userDetailsService for all other users
         /*auth
             .inMemoryAuthentication()
-            .withUser("user").password("password").roles("USER");*/
+            .withUser("admin").password("admin").roles(Role.ADMIN_ROLE);*/
 
         auth.userDetailsService(userDetailsService);
-        //JdbcUserDetailsManagerConfigurer configurer = auth.jdbcAuthentication();
-
-        //test
-        //UserDetailsService service = configurer.getUserDetailsService();
     }
 
     @Override
@@ -37,8 +45,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/resources/**").permitAll()
-                .antMatchers("/register/**").permitAll()
+                //.antMatchers("*/register/**").permitAll()
                 .anyRequest().authenticated()
+                .and()
+            .authorizeRequests()
+                .antMatchers("*/register/**").permitAll()
+                //.anyRequest().anonymous()
                 .and()
             .formLogin()
                 .loginPage("/login")

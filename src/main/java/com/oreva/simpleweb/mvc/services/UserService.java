@@ -1,10 +1,14 @@
 package com.oreva.simpleweb.mvc.services;
 
+import com.oreva.simpleweb.mvc.entities.Role;
 import com.oreva.simpleweb.mvc.entities.User;
+import com.oreva.simpleweb.mvc.repositories.RoleRepository;
 import com.oreva.simpleweb.mvc.repositories.UserRepository;
 import com.oreva.simpleweb.mvc.web.dto.UserDTO;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -22,7 +26,9 @@ import java.util.List;
 @Transactional
 public class UserService extends EntityService<User> {
     @Inject
-    private UserRepository repository;
+    public UserRepository repository;
+    @Inject
+    public RoleRepository roleRepository;
 
     @Override
     public User findById(Long id) {
@@ -60,5 +66,18 @@ public class UserService extends EntityService<User> {
     @Override
     public void save(User entity) {
         repository.save(entity);
+    }
+
+    public void initAdminUser(UserDetailsService userDetailsService) {
+        UserDetails existingAdmin = userDetailsService.loadUserByUsername(User.ADMIN_USERNAME);
+        if (null == existingAdmin) {
+            User admin = User.admin;
+
+            Role adminRole = roleRepository.findByName(Role.ADMIN_ROLE);
+            if (null != adminRole) {
+                admin.getRoles().add(adminRole);
+            }
+            repository.save(admin);
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.oreva.simpleweb.mvc.security.config;
+package com.oreva.simpleweb.mvc.config.security;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

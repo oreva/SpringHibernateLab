@@ -21,6 +21,18 @@ import java.util.List;
 @NamedEntityGraph(name = "userWithMessagesEntityGraph",
     attributeNodes = {@NamedAttributeNode("messages")})*/
 public class User extends Entity implements UserDetails {
+
+    public static String ADMIN_USERNAME = "admin@admin.com"; //username is admin's Email
+    public static final User admin = createAdminUser();
+
+    private static User createAdminUser() {
+        User user = new User();
+        user.setFirstName("admin");
+        user.setPassword("admin");
+        user.setMail(ADMIN_USERNAME);
+        return user;
+    }
+
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -47,25 +59,6 @@ public class User extends Entity implements UserDetails {
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private List<Role> roles = new ArrayList<Role>();
-
-    /*
-    TODO: remove this constructor. Added here only for test user roles
-     */
-    /*@Inject
-    private RoleRepository roleRepository;
-
-    public User() {
-        Role adminRole;
-        if (0 == roles.size()) {
-            adminRole = roleRepository.findByName("ROLE_ADMIN");
-            if (null == adminRole) {
-                adminRole = new Role();
-                adminRole.setName("ROLE_ADMIN");
-                roleRepository.save(adminRole);
-            }
-            getRoles().add(adminRole);
-        }
-    }*/
 
     public Long getId() {
         return id;

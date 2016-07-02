@@ -1,5 +1,6 @@
 package com.oreva.simpleweb.mvc.controllers;
 
+import com.oreva.simpleweb.mvc.repositories.MessageRepository;
 import com.oreva.simpleweb.mvc.services.MessageService;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
@@ -20,8 +21,8 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 public class MessageControllerTest {
     @Test
     public void testStoreMessage() throws Exception {
-        MessageService service = new MessageService(mock(MessageDAO.class));
-        MessageController controller = new MessageController(service);
+        MessageService service = mock(MessageService.class);
+        MessageController controller = mock(MessageController.class);
 
         MockMvc mockMvc = standaloneSetup(controller).build();
         mockMvc.perform(MockMvcRequestBuilders.get("/messages?new=")).
@@ -30,8 +31,8 @@ public class MessageControllerTest {
 
     @Test
     public void testAddMessageFromForm() throws Exception {
-        MessageService service = new MessageService(mock(MessageDAO.class));
-        MessageController controller = new MessageController(service);
+        MessageService service = mock(MessageService.class);
+        MessageController controller = mock(MessageController.class);
 
         MockMvc mockMvc = standaloneSetup(controller).build();
         mockMvc.perform(MockMvcRequestBuilders.post("/messages?new=")).

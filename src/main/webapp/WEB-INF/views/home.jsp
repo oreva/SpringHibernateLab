@@ -29,7 +29,10 @@
             </form>
         </div>
 
-        <h3>Enter user id to login</h3>
+        <form method="get" action="messages/result">
+            <input type="submit" value="Go on">
+        </form>
+        <!--<h3>Enter user id to login</h3>
         <sf:form method="POST" modelAttribute="userStub">
             <input type="hidden" name="login" value=""/>
             <fieldset>
@@ -60,7 +63,7 @@
                     </tr>
                 </table>
             </fieldset>
-        </form>
+        </form>-->
     </div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.oreva.simpleweb.mvc.security;
+package com.oreva.simpleweb.mvc.config.security;
 
 import com.oreva.simpleweb.mvc.entities.User;
 import com.oreva.simpleweb.mvc.services.UserService;

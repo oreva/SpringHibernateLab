@@ -18,6 +18,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     //We could use EntityGraph instead of the @Query, but our problem is "how to define 2 methods findById for user without messages and with messages? JpaRepository's naming convensions don't allow us to do so.":
     //@EntityGraph(value = "userWithMessagesEntityGraph", type = EntityGraph.EntityGraphType.FETCH)
     //User findById(Long id);
-    @Query("SELECT u FROM User u JOIN FETCH u.messages WHERE u.id = (:id)")
+    @Query("SELECT u FROM User u LEFT JOIN FETCH u.messages WHERE u.id = (:id)")
     User findByIdAndFetchMessagesEagerly(@Param("id") Long id);
 }
