@@ -34,7 +34,7 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping(method = RequestMethod.POST, params = "login")
+    /*@RequestMapping(method = RequestMethod.POST, params = "login")
     public String login(Model model,
                        @Valid UserDTO userStub,
                        Errors errors) {
@@ -52,5 +52,5 @@ public class HomeController {
             }
         }
         return currentPage;
-    }
+    }*/
 }

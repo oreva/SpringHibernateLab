@@ -29,9 +29,38 @@
             </form>
         </div>
 
-        <form method="get" action="messages/result">
+        <div>
+            <h3>You can select one of the following actions and proceed:</h3>
+
+            <h4>Messages</h4>
+            <form action="messages/new" method="GET">
+                <input type="submit" value="Create New Message">
+            </form>
+            <form action="messages/list" method="GET">
+                <input type="hidden" name="listCurrent" value="">
+                <input type="submit" value="Read Your Messages">
+            </form>
+            <form action="messages/list" method="GET">
+                <input type="hidden" name="list" value="">
+                <input type="submit" value="Read All Messages">
+            </form>
+
+            <h4>Users</h4>
+            <form action="users/list" method="GET">
+                <input type="submit" value="View Users"/>
+            </form>
+
+            <h4>Tags</h4>
+            <form action="tags/list" method="GET">
+                <input type="submit" value="View All Tags"/>
+            </form>
+        </div>
+
+        <!--<form method="get" action="messages/result">
             <input type="submit" value="Go on">
-        </form>
+        </form>-->
+
+        <!-- Old code, ignore this -->
         <!--<h3>Enter user id to login</h3>
         <sf:form method="POST" modelAttribute="userStub">
             <input type="hidden" name="login" value=""/>

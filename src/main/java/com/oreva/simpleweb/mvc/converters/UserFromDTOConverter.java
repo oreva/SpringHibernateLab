@@ -30,6 +30,7 @@ public class UserFromDTOConverter implements Converter<UserDTO, User> {
         user.setLastName(userDTO.getLastName());
         user.setMail(userDTO.getMail());
         user.setPhone(userDTO.getPhone());
+        user.setPassword(userDTO.getPassword());
         return user;
     }
 }

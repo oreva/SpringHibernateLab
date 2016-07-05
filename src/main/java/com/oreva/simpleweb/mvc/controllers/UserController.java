@@ -5,6 +5,7 @@ import com.oreva.simpleweb.mvc.services.UserService;
 import com.oreva.simpleweb.mvc.web.dto.UserDTO;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -49,7 +50,7 @@ public class UserController {
                             @ModelAttribute("userStub") @Valid UserDTO userStub,
                             Errors errors) {
         String currentPage = "users/edit";
-        String nextPage = "redirect:/messages/result";
+        String nextPage = "redirect:/home";
 
         if (errors.hasErrors()) {
             return currentPage;
@@ -70,7 +71,7 @@ public class UserController {
                             Errors errors) {
 
         String currentPage = "users/edit";
-        String nextPage = "redirect:/messages/result";
+        String nextPage = "redirect:/home";
 
         if (errors.hasErrors()) {
             return currentPage;
@@ -85,6 +86,7 @@ public class UserController {
 
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET, params = "user")
+    @PreAuthorize("hasAuthority('EDIT_USERS')")
     public String editUser(Model model, HttpServletRequest request) {
         Long userId = Long.valueOf(request.getParameter("user"));
         User user = userService.findById(userId); //userService.getById(userId);
@@ -95,6 +97,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @PreAuthorize("hasAuthority('VIEW_ALL_USERS')")
     public String listAllUsers(Model model) {
         List<User> sources = userService.findAllUsers(); //userService.loadAllUsers();
         List<UserDTO> users = (List<UserDTO>) conversionService.convert(sources,

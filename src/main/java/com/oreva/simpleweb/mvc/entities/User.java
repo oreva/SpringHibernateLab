@@ -1,5 +1,6 @@
 package com.oreva.simpleweb.mvc.entities;
 
+import com.oreva.simpleweb.mvc.entities.enums.Permission;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -112,7 +113,26 @@ public class User extends Entity implements UserDetails {
      */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        List<GrantedAuthority> permissions = new ArrayList<>();
+        for (Role role: getRoles()) {
+            for (Permission permission: role.getPermissions()) {
+                permissions.add(new PermissionAsGrantedAuthority(permission));
+            }
+        }
+        return permissions;
+    }
+
+    class PermissionAsGrantedAuthority implements GrantedAuthority {
+        private Permission permission;
+
+        @Override
+        public String getAuthority() {
+            return permission.name();
+        }
+
+        public PermissionAsGrantedAuthority(Permission permission) {
+            this.permission = permission;
+        }
     }
 
     @Override

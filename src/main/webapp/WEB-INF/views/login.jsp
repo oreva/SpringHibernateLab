@@ -35,7 +35,6 @@
             <p>
                 <table cellspacing="2" cellpadding="2">
                     <thead>Enter your email address and password to login:</thead>
-                    <br/>
                     <tr>
                         <th align="left"><label for="username">Username (email)</label></th>
                         <td><input type="text" id="username" name="username"/></td>
@@ -45,6 +44,7 @@
                         <td><input type="password" id="password" name="password"/></td>
                     </tr>
                     <tr>
+                        <td></td>
                         <td align="right"><input type="submit" value="Log in"></td>
                     </tr>
                 </table>
@@ -61,10 +61,12 @@
             </p>
             <input type="submit" value="Log in">-->
         </form>
-        <form action="users/register" method="get">
-            <b>Or register new account:</b>
-            <input type="submit" value="Register">
-        </form>
+        <p>
+            <form action="users/register" method="get">
+                Or register new account:
+                <input type="submit" value="Register">
+            </form>
+        </p>
     </div>
 </body>
 </html>

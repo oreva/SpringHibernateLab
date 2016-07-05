@@ -30,7 +30,7 @@ public class Role extends Entity {
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
 
-    @ElementCollection(targetClass = Permission.class)
+    @ElementCollection(targetClass = Permission.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "role_permissions",
         joinColumns = @JoinColumn(name = "role_id"))

@@ -41,6 +41,16 @@ public class UserDTO extends DTO {
             message = "Invalid email format.")
     private String mail;
 
+    @NotNull
+    @Size(min = 5, max = 20,
+            message = "Password must be 5 to 20 characters long")
+    private String password;
+
+    @NotNull
+    @Size(min = 5, max = 20,
+            message = "Enter you password again")
+    private String confirmPassword;
+
     public Long getId() {
         return id;
     }
@@ -81,4 +91,19 @@ public class UserDTO extends DTO {
         this.mail = mail;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
 }

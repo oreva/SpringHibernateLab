@@ -7,6 +7,7 @@ import com.oreva.simpleweb.mvc.services.UserService;
 import com.oreva.simpleweb.mvc.web.dto.MessageDTO;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -55,6 +56,7 @@ public class MessageController {
     }
 
     @RequestMapping(value = "list", method = RequestMethod.GET, params = "list")
+    @PreAuthorize("hasAuthority('VIEW_ALL_MESSAGES')")
     public String showMessages(Model model, HttpServletRequest request) {
         String userIdString = request.getParameter("list");
         try {
@@ -99,13 +101,11 @@ public class MessageController {
         //Create new message when collection of messages will be created
         messageService.newMessage(messageStub, user, conversionService);
 
-        return "redirect:/messages/result";
+        return "redirect:/home";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/result")
+    /*@RequestMapping(method = RequestMethod.GET, value = "/result")
     public String showResultPage() {
         return "messages/result";
-    }
-
-
+    }*/
 }
