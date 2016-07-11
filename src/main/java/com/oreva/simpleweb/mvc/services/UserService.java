@@ -5,6 +5,7 @@ import com.oreva.simpleweb.mvc.entities.User;
 import com.oreva.simpleweb.mvc.repositories.RoleRepository;
 import com.oreva.simpleweb.mvc.repositories.UserRepository;
 import com.oreva.simpleweb.mvc.web.dto.UserDTO;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -28,7 +31,7 @@ public class UserService extends EntityService<User> {
     @Inject
     public UserRepository repository;
     @Inject
-    public RoleRepository roleRepository;
+    public RoleService roleService;
 
     @Override
     public User findById(Long id) {
@@ -73,11 +76,53 @@ public class UserService extends EntityService<User> {
         if (null == existingAdmin) {
             User admin = User.admin;
 
-            Role adminRole = roleRepository.findByName(Role.ADMIN_ROLE);
+            Role adminRole = roleService.findByName(Role.ADMIN_ROLE);
             if (null != adminRole) {
                 admin.getRoles().add(adminRole);
             }
             repository.save(admin);
         }
+    }
+
+    //?crash??@PreAuthorize("hasAuthority('DELETE_USERS')")
+    public void delete(Long userId) {
+
+        repository.delete(userId);
+    }
+
+    public void updateUserRoles(User user, List<String> newRoleNames) {
+        List<Role> rolesToRemove = new ArrayList<>();
+
+        for (Role r: user.getRoles()) {
+            if (newRoleNames.indexOf(r.getName()) < 0) {
+                rolesToRemove.add(r);
+            }
+        }
+        // Remove old roles
+        for (Role r: rolesToRemove) {
+            user.getRoles().remove(r);
+        }
+
+        List<String> roleNamesToAdd = new ArrayList<>();
+        for (String roleName: newRoleNames) {
+            boolean addRole = true;
+            for (Role role: user.getRoles()) {
+                if (role.getName().equals(roleName)) {
+                    addRole = false;
+                    break;
+                }
+            }
+            if (addRole) {
+                roleNamesToAdd.add(roleName);
+            }
+        }
+        //Add new roles
+        for (String roleName: roleNamesToAdd) {
+            Role role = roleService.findByName(roleName);
+            user.getRoles().add(role);
+        }
+
+        //Save
+        repository.save(user);
     }
 }

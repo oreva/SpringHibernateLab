@@ -33,24 +33,4 @@ public class HomeController {
         model.addAttribute("userStub", new UserDTO());
         return "home";
     }
-
-    /*@RequestMapping(method = RequestMethod.POST, params = "login")
-    public String login(Model model,
-                       @Valid UserDTO userStub,
-                       Errors errors) {
-        String currentPage = "home";
-        String nextPage = "redirect:/messages/result";
-
-        Long enteredID = userStub.getId();
-        if (null != enteredID && 0 < enteredID && 100 > enteredID) {
-            User user = userService.findById(enteredID); //userService.getById(enteredID);
-            if (null != user) {
-                //model.addAttribute("user", user);
-                return nextPage;
-            } else {
-                model.addAttribute("errorStr", "There is no registered user with entered id");
-            }
-        }
-        return currentPage;
-    }*/
 }

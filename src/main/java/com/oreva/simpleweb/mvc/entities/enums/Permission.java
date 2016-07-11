@@ -6,6 +6,7 @@ package com.oreva.simpleweb.mvc.entities.enums;
 public enum Permission {
     VIEW_ALL_USERS,
     EDIT_USERS,
+    EDIT_USER_ROLES,
     DELETE_USERS,
 
     VIEW_ALL_MESSAGES,

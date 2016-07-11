@@ -46,6 +46,9 @@
             </form>
 
             <h4>Users</h4>
+            <form action="users/editProfile" method="GET">
+                <input type="submit" value="Edit Your Profile"/>
+            </form>
             <form action="users/list" method="GET">
                 <input type="submit" value="View Users"/>
             </form>
@@ -55,44 +58,6 @@
                 <input type="submit" value="View All Tags"/>
             </form>
         </div>
-
-        <!--<form method="get" action="messages/result">
-            <input type="submit" value="Go on">
-        </form>-->
-
-        <!-- Old code, ignore this -->
-        <!--<h3>Enter user id to login</h3>
-        <sf:form method="POST" modelAttribute="userStub">
-            <input type="hidden" name="login" value=""/>
-            <fieldset>
-                <table cellspacing="0">
-                    <tr>
-                        <th><label for="user_id">User ID</label></th>
-                        <td><sf:input path="id" size="10" id="user_id" maxlength="10"/>
-                            <small>Enter existing user id</small><br>
-                            <small>${errorStr}</small>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <sf:button value="">Login</sf:button>
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
-        </sf:form>
-        <form method="GET" action="users/register">
-            <fieldset>
-                <table cellspacing="0" border="0">
-                    <tr>
-                        <td>
-                            <h4>Or register new account:</h4>
-                            <button value="">Create account</button>
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
-        </form>-->
     </div>
 </body>
 </html>

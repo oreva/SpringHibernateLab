@@ -34,4 +34,8 @@ public class RoleService extends EntityService<Role> {
             }
         }
     }
+
+    public Role findByName(String roleName) {
+        return repository.findByName(roleName);
+    }
 }

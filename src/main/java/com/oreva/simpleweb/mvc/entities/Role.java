@@ -14,10 +14,16 @@ import java.util.function.Function;
 @Table(name = "ROLES")
 public class Role extends Entity {
 
-    public static String ADMIN_ROLE = "admin";
-    public static String CAN_VIEW_ALL = "canViewAll";
-    public static String CAN_EDIT_ROLE = "canEdit";
-    public static String CAN_DELETE_ROLE = "canDelete";
+    public static final String ADMIN_ROLE = "admin";
+    public static final String CAN_VIEW_ALL = "canViewAll";
+    public static final String CAN_EDIT_ROLE = "canEdit";
+    public static final String CAN_DELETE_ROLE = "canDelete";
+    public static final String[] allRoleNames = {
+            CAN_VIEW_ALL,
+            CAN_EDIT_ROLE,
+            CAN_DELETE_ROLE,
+            ADMIN_ROLE
+    };
 
     @Id
     @GeneratedValue
@@ -114,5 +120,10 @@ public class Role extends Entity {
         return new Role(ADMIN_ROLE, Arrays.asList(
                 Permission.values()
         ));
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }

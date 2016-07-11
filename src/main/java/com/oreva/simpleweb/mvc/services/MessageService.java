@@ -23,11 +23,11 @@ import java.util.List;
 @Transactional
 public class MessageService extends EntityService<Message> {
     @Inject
-    private MessageRepository repository;
+    public MessageRepository repository;
     @Inject
-    private TagService tagService;
+    public TagService tagService;
     @Inject
-    private UserService userService;
+    public UserService userService;
 
     @Override
     public Message findById(Long id) {

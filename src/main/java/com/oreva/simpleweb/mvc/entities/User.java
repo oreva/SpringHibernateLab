@@ -107,6 +107,10 @@ public class User extends Entity implements UserDetails {
 
     public List<Role> getRoles() { return roles; }
 
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
     /**
      * UserDetails implementation
      * @return

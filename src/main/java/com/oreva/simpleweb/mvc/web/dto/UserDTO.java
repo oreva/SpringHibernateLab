@@ -4,6 +4,7 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -50,6 +51,8 @@ public class UserDTO extends DTO {
     @Size(min = 5, max = 20,
             message = "Enter you password again")
     private String confirmPassword;
+
+    public List<String> roles;
 
     public Long getId() {
         return id;
@@ -105,5 +108,13 @@ public class UserDTO extends DTO {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 }

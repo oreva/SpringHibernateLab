@@ -27,13 +27,18 @@ public class CustomConversionServiceFactoryBean extends ConversionServiceFactory
     private TagToDTOConverter tagToDTOConverter;
     @Inject
     private TagFromDTOConverter tagFromDTOConverter;
+    @Inject
+    private RoleFromStringConverter roleFromStringConverter;
+    @Inject
+    private RoleToStringConverter roleToStringConverter;
 
     @Override
     public void afterPropertiesSet() {
         Set<Converter> converters = new HashSet<>();
         converters.addAll(Arrays.asList(userFromDTOConverter, userToDTOConverter,
                 messageFromDTOConverter, messageToDTOConverter,
-                tagFromDTOConverter, tagToDTOConverter));
+                tagFromDTOConverter, tagToDTOConverter,
+                roleFromStringConverter, roleToStringConverter));
         setConverters(converters);
 
         super.afterPropertiesSet();
