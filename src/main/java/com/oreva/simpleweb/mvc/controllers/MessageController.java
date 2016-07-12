@@ -90,8 +90,8 @@ public class MessageController {
     }
 
     @RequestMapping(value = "/new", method=RequestMethod.POST)
-    public String addMessageFromForm(//@ModelAttribute User user,
-                                     @Valid MessageDTO messageStub,
+    public String addMessageFromForm(Model model,
+                                     @ModelAttribute("messageStub") @Valid MessageDTO messageStub,
                                      Errors errors) {
         if(errors.hasErrors()) {
             return "messages/edit";

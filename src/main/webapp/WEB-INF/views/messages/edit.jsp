@@ -29,7 +29,7 @@
                                          rows="5" cols="80"
                                          id="user_message"/>
                             <small id="msg_area">Enter you message</small><br/>
-                            <sf:errors path="text" cssClass="error"/>
+                            <sf:errors path="text" cssStyle="color:red;font-size:small"/>
                         </td>
                     </tr>
                     <tr>
@@ -38,7 +38,7 @@
                                          rows="5" cols="80"
                                          id="message_tags"/>
                             <small id="tags_area">Enter message tags</small><br/>
-                            <sf:errors path="tagString" cssClass="error"/>
+                            <sf:errors path="tagString" cssStyle="color:red;font-size:small"/>
                         </td>
                     </tr>
                     <tr>
